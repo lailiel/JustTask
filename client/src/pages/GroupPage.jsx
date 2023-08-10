@@ -1,4 +1,5 @@
 import Container from "react-bootstrap/Container";
+import TaskComponent from '../components/TaskCard'
 
 export default function AboutPage() {
   return (
@@ -6,7 +7,7 @@ export default function AboutPage() {
       <div className="">
         <h2>GROUP PAGE</h2>
       </div>
-
+      <TaskComponent/>
       <div id='home-text'>
         <p>THIS IS A TEST</p>
 

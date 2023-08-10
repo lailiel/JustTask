@@ -6,7 +6,7 @@ export default function AboutPage() {
       <div className="">
         <h2>USER</h2>
       </div>
-
+      
       <div id='home-text'>
         <p>THIS IS A TEST</p>
 

@@ -3,7 +3,6 @@ import './App.css'
 import { Outlet, useLocation } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import Nav from './components/nav'
-// import Footer from './components/'
 import routes from './main'
 import Container from 'react-bootstrap/Container'
 
@@ -35,7 +34,6 @@ function App() {
           </CSSTransition>
         </TransitionGroup>
       </Container>
-      {/* <Footer/> */}
     </>
   )
 }
