@@ -1,0 +1,45 @@
+:root {
+  --x-light:#EFF7FC;
+  --light: #BAFFDF;
+  --mid-light: #70C1F3;
+  --mid: #319441;
+  --mid-dark: #002C56;
+  --dark: #0D0038;
+  --contrast: #D60033;
+}
+
+
+
+/* ------------------------------------------- */
+
+#navbar{
+  background-color: var(--dark);
+}
+
+.nav-link{
+  color: var(--light);
+  transition: 0.4s ease-out;
+}
+
+.nav-link:active,  .nav-link:hover, .nav-link:focus {
+  color:var(--x-light);
+  transform: scale(1.1);
+}
+
+#nav-name{
+  color: var(--mid)
+}
+
+#basic-navbar-nav {
+  background-color: var(--dark);
+}
+
+#nav-default{
+  display: block;
+}
+
+#nav-logo{
+  display: block;
+}
+
+/* ------------------------------------------- */
