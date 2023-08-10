@@ -1,0 +1,18 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+  }
+  
+  #root{
+    min-height: 100vh;
+  }
+  
+  
+  #aboutme{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
