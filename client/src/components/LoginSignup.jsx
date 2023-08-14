@@ -17,8 +17,8 @@ const LoginToggle = () => {
   return (
     <>
       {activeCard === "login" && (
-        <Card class="login-card">
-          <Card.Title>Login</Card.Title>
+        <Card className="login-card" id="login-card">
+          <Card.Title id="login-card-title">Login</Card.Title>
           <div>
             <Form.Label id="form-label">Email:</Form.Label>
             <InputGroup className="mb-3">
@@ -42,9 +42,13 @@ const LoginToggle = () => {
               />
             </InputGroup>
           </div>
-          <div>
+          <div >
             <Button>Submit</Button>
-            <Button onClick={() => handleCardChange("signup")} variant="primary">
+            <Button 
+              className="mx-4" 
+              onClick={() => handleCardChange("signup")} 
+            
+              >
               Signup
             </Button>
           </div>
@@ -52,8 +56,8 @@ const LoginToggle = () => {
       )}
 
       {activeCard === "signup" && (
-        <Card class="signup-card">
-          <Card.Title>Signup</Card.Title>
+        <Card className="signup-card" id="signup-card">
+          <Card.Title id="lsignup-card-title">Signup</Card.Title>
           <div>
             <Form.Label id="form-label">Name:</Form.Label>
             <InputGroup className="mb-3">
@@ -87,11 +91,12 @@ const LoginToggle = () => {
               />
             </InputGroup>
           </div>
-          <div>
+          <div >
             <Button>Submit</Button>
             <Button
+              className="mx-4"
               onClick={() => handleCardChange("login")}
-              variant="secondary"
+             
             >
               Login
             </Button>

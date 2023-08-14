@@ -5,7 +5,7 @@ import LoginToggle from "../components/LoginSignup";
 
 export default function AboutPage() {
   return (
-    <Container fluid className="p-5" id="homepage">
+    <Container fluid className="p-5" id="login-signup">
       <LoginToggle/>
     </Container>
   );
