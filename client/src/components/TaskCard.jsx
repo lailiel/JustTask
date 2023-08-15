@@ -33,13 +33,19 @@ const TaskCards = () => {
     <Card className="task-creation p-4" id="task-creation">
       <Card.Title id="login-card-title">Task</Card.Title>
       {/* {completeBy && (
-            <p>Complete by : DATE</p>
+            <p>Complete By : DATE</p>
+            )}
+            {assigned && (
+            <p>Assigned To : user </p>
+            )}
+            {status && (
+            <p>Current Status : or badge</p>
+            )}
+            {dollar && (
+            <p>Value : $$ </p>
             )}
             {points && (
-            <p>Points Here</p>
-            )}
-            {score && (
-            <p>Score Here</p>
+            <p>Points : 00 Pts</p>
             )} */}
       <Card.Text>Task Description</Card.Text>
 

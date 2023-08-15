@@ -16,10 +16,15 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 const TaskCreation = () => {
 
+  const [ dateToggle, setDateToggle] = useState(false);
   const [ assignToggle, setAssignToggle] = useState(false);
   const [ dollarToggle, setDollarToggle] = useState(false);
   const [ scoreToggle, setScoreToggle] = useState(false);
   const [ errorMessage, setErrorMessage ]= useState('')
+
+  const toggleDate = () => {
+    setDateToggle(!dateToggle);
+  };
 
   const toggleAssign = () => {
     setAssignToggle(!assignToggle);
@@ -47,8 +52,7 @@ const TaskCreation = () => {
 
   return (
     <Card className="task-creation p-4" id="task-creation">
-    <Card.Title id="login-card-title">New Task</Card.Title>
-    <div>
+     <div>
       <Form.Label id="form-label">Task:</Form.Label>
       <InputGroup className="mb-3">
         <Form.Control
@@ -78,14 +82,18 @@ const TaskCreation = () => {
       
       <Form.Label id="form-label">Complete By:</Form.Label>
       <InputGroup className="mb-3">
-          <InputGroup.Text className="input-group-text">Select Date</InputGroup.Text>
-          <DatePicker
+        <Button onClick={() => toggleDate(true)}>Select Date</Button>
+        
+          {dateToggle && (
+            <DatePicker
             id="date-picker"
             selected={selectedDate}
             onChange={handleDateChange}
             dateFormat="MM/dd/yyyy"
             className="form-control"
-          />
+            />
+          )}
+         
       </InputGroup>
 
       <Form.Label id="form-label">Assign:</Form.Label>
@@ -107,23 +115,27 @@ const TaskCreation = () => {
       <Form.Label id="form-label">Dollar Value:</Form.Label>
       <InputGroup className="mb-3">
         <Button onClick={() => toggleDollar(true)}>+</Button>
+       
         {dollarToggle && (
            <InputGroup className="mb-3">
            <InputGroup.Text className="input-group-text">$</InputGroup.Text>
            <Form.Control className="input-field" aria-label="0" />
           </InputGroup>
         )}
+    
       </InputGroup>
 
       <Form.Label id="form-label">Score:</Form.Label>
       <InputGroup className="mb-3">
         <Button onClick={() => toggleScore(true)}>+</Button>
+    
         {scoreToggle && (
            <InputGroup className="mb-3">
            <Form.Control className="input-field" aria-label="0" />
            <InputGroup.Text className="input-group-text">Pts</InputGroup.Text>
          </InputGroup>
         )}
+  
       </InputGroup>
 
     </div>
