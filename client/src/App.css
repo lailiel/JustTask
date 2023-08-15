@@ -18,6 +18,9 @@ body {
   background-color: var(--x-light);
 }
 
+.card {
+  background-color: var(--light);
+}
 
 
 /* ------------------------------------------- */
@@ -74,6 +77,16 @@ body {
 
 #form-label{
   color: var(--mid-dark);
+}
+
+/* ------------------------------------------- */
+
+#date-picker{
+  background-color: var(--x-light);
+}
+
+#input-group-text{
+  background-color: var(--x-light);
 }
 
 /* ------------------------------------------- */
