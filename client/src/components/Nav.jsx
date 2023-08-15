@@ -16,7 +16,7 @@ export default function CustomNavbar() {
     <>
     <Navbar data-bs-theme="dark" expand="md" style={{height: '90px'}}className='sticky-top' id="navbar" expanded={expanded}>
       <Container fluid className='p-0 m-0'>
-        <Navbar.Brand href="/" id='nav-name' className='p-3'>
+        <Navbar.Brand href="/" id='nav-name' className='py-auto px-3'>
           {/* <img id="nav-default" src={name} style={{height: '35px'}}/>
           <img id="nav-logo" src={logo} style={{height: '35px'}}/> */}
           JustTask

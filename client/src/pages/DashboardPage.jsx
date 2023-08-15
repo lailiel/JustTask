@@ -1,5 +1,5 @@
 import Container from "react-bootstrap/Container";
-import TaskComponent from "../components/TaskCard";
+import TaskComponent from "../components/TaskCreation";
 
 export default function AboutPage() {
   return (
