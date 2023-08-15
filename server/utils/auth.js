@@ -10,7 +10,7 @@ module.exports = {
             code: 'UNAUTHENTICATED',
         },
     }),
-    authMiddleWare: function ({req}) {
+    authMiddleware: function ({req}) {
         //allows the token to be sent via req.body, req.query, req.headers
         let token = req.body.token || req.query.token || req.headers.authorization;
         // ["Bearer", "<tokenvalue>"]
