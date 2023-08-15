@@ -32,8 +32,11 @@ const TaskCards = () => {
   return (
     <Card className="task-creation p-4" id="task-creation">
       <Card.Title id="login-card-title">Task</Card.Title>
-      {/* {completeBy && (
+         {/* {completeBy && (
             <p>Complete By : DATE</p>
+            )}
+            {group && (
+            <p>Group : group </p>
             )}
             {assigned && (
             <p>Assigned To : user </p>

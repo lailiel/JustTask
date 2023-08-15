@@ -85,6 +85,16 @@ body {
   background-color: var(--x-light);
 }
 
+
+
+.react-datepicker-wrapper{
+  display: flex!important;
+  position: relative;
+  flex: 1 1 auto;
+  width: 1%;
+  min-width: 0;
+}
+
 .input-group-text{
   background-color: var(--mid-light);
 }

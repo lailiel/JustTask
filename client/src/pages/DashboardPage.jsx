@@ -1,13 +1,16 @@
 import Container from "react-bootstrap/Container";
-import TaskComponent from "../components/TaskCreation";
+import TaskCards from "../components/TaskCard";
 
 export default function AboutPage() {
+
+  
+
   return (
     <Container fluid className="p-5" id="dashboard-page">
       <div className="">
         <h2>DASHBOARD</h2>
       </div>
-      <TaskComponent/>
+      <TaskCards/>
 
       <div id='dashboard-text'>
    
