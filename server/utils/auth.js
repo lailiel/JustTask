@@ -11,8 +11,9 @@ module.exports = {
         },
     }),
     authMiddleWare: function ({req}) {
+        //allows the token to be sent via req.body, req.query, req.headers
         let token = req.body.token || req.query.token || req.headers.authorization;
-
+        // ["Bearer", "<tokenvalue>"]
         if(req.headers.authorization){
             token.split('').pop().trim();
         }
@@ -20,7 +21,7 @@ module.exports = {
         if(!token){
             return req;
         }
-        
+        // verify token and get user data out of it
         try{
             const { data } = jwt.verify(token, secret, { maxAge: expiration});
             req.user  = data;
