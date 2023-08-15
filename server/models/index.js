@@ -1,5 +1,5 @@
-const User = require('./user');
-const Group = require('./group');
-const Task = require('/task');
+const User = require('./User');
+const Group = require('./Group');
+const Task = require('./Task');
 
 module.exports = { User, Group, Task };
