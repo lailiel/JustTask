@@ -1,17 +1,13 @@
 import Container from "react-bootstrap/Container";
-import TaskComponent from '../components/TaskCreation'
+import TaskCards from '../components/TaskCard'
 
 export default function AboutPage() {
   return (
     <Container fluid className="p-5" id="homepage">
       <div className="">
-        <h2>GROUP PAGE</h2>
+        <h2>GROUP PAGE - GroupName from DB- </h2>
       </div>
-      <TaskComponent/>
-      <div id='home-text'>
-        <p>THIS IS A TEST</p>
-
-      </div>
+      <TaskCards/>
     </Container>
   );
 }

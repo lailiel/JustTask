@@ -1,16 +1,25 @@
-import { Container, Card, Button, Form, Dropdown, DropdownButton, InputGroup} from "react-bootstrap/";
+import { Card, Button, Form, Dropdown, DropdownButton, InputGroup} from "react-bootstrap/";
 import DatePicker from 'react-datepicker'
 import { useState } from "react";
 import 'react-datepicker/dist/react-datepicker.css';
 
 
-const TaskComponent = () => {
+
+// --------------------
+// TODO
+
+// --verify dollar/score inputs are numbers
+// --auth stuff
+
+// --------------------
+
+
+const TaskCreation = () => {
 
   const [ assignToggle, setAssignToggle] = useState(false);
   const [ dollarToggle, setDollarToggle] = useState(false);
   const [ scoreToggle, setScoreToggle] = useState(false);
-
-  // const [ errorMessage, setErrorMessage ]= useState('')
+  const [ errorMessage, setErrorMessage ]= useState('')
 
   const toggleAssign = () => {
     setAssignToggle(!assignToggle);
@@ -25,13 +34,16 @@ const TaskComponent = () => {
   };
 
 
-  const [selectedDate, setSelectedDate] = useState(null);
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
+  const [selectedUser, setSelectedUser] = useState("Assign To");
+  const handleUserSelect = (user) => {
+    setSelectedUser(user);
   };
 
 
+  const [selectedDate, setSelectedDate] = useState(null);
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
 
   return (
     <Card className="task-creation p-4" id="task-creation">
@@ -63,7 +75,6 @@ const TaskComponent = () => {
           // onChange={handleInputChange}
         />
       </InputGroup>
-
       
       <Form.Label id="form-label">Complete By:</Form.Label>
       <InputGroup className="mb-3">
@@ -77,22 +88,18 @@ const TaskComponent = () => {
           />
       </InputGroup>
 
-
-{/* fix the onclick event to keep the name chosen */}
-
       <Form.Label id="form-label">Assign:</Form.Label>
       <InputGroup className="mb-3">
         <Button onClick={() => toggleAssign(true)}>+</Button>
         {assignToggle && (
           <DropdownButton
           variant="outline-secondary"
-          title="Assign To"
-          id="input-group-dropdown-1"
-        >
-          <Dropdown.Item href="#">Sarah</Dropdown.Item>
-          <Dropdown.Item href="#">Richard</Dropdown.Item>
-          <Dropdown.Item href="#">Your Mom</Dropdown.Item>
-          <Dropdown.Item href="#">Dex</Dropdown.Item>
+          title={selectedUser}
+          id="input-group-dropdown-1">
+          <Dropdown.Item onClick={() => handleUserSelect("Sarah")}>Sarah</Dropdown.Item>
+          <Dropdown.Item onClick={() => handleUserSelect("Richard")}>Richard</Dropdown.Item>
+          <Dropdown.Item onClick={() => handleUserSelect("Your Mom")}>Your Mom</Dropdown.Item>
+          <Dropdown.Item onClick={() => handleUserSelect("Dex")}>Dex</Dropdown.Item>
         </DropdownButton>
         )}
       </InputGroup>
@@ -103,7 +110,7 @@ const TaskComponent = () => {
         {dollarToggle && (
            <InputGroup className="mb-3">
            <InputGroup.Text className="input-group-text">$</InputGroup.Text>
-           <Form.Control aria-label="0" />
+           <Form.Control className="input-field" aria-label="0" />
           </InputGroup>
         )}
       </InputGroup>
@@ -113,24 +120,23 @@ const TaskComponent = () => {
         <Button onClick={() => toggleScore(true)}>+</Button>
         {scoreToggle && (
            <InputGroup className="mb-3">
-           <Form.Control aria-label="0" />
+           <Form.Control className="input-field" aria-label="0" />
            <InputGroup.Text className="input-group-text">Pts</InputGroup.Text>
          </InputGroup>
         )}
       </InputGroup>
 
     </div>
+
+    <Button onClick={() => setErrorMessage("coming soon")}>SUBMIT</Button>
+    
     <div>
-      
-    </div>
-     <Button>SUBMIT</Button>
-    {/* <Button onClick={() => setErrorMessage("coming soon")}>SUBMIT</Button> */}
-    {/* <div>
       {errorMessage}
-    </div> */}
+    </div>
+
   </Card>
   );
 }
 
 
-export default TaskComponent
+export default TaskCreation
