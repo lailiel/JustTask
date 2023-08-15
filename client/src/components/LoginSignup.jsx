@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Form, InputGroup, Button } from "react-bootstrap";
+import { Card, Form, InputGroup, Button, Row, Col } from "react-bootstrap";
 
 const LoginToggle = () => {
   const [activeCard, setActiveCard] = useState("login");
@@ -17,7 +17,7 @@ const LoginToggle = () => {
   return (
     <>
       {activeCard === "login" && (
-        <Card className="login-card" id="login-card">
+        <Card className="login-card p-4" id="login-card">
           <Card.Title id="login-card-title">Login</Card.Title>
           <div>
             <Form.Label id="form-label">Email:</Form.Label>
@@ -42,21 +42,19 @@ const LoginToggle = () => {
               />
             </InputGroup>
           </div>
-          <div >
-            <Button>Submit</Button>
-            <Button 
-              className="mx-4" 
-              onClick={() => handleCardChange("signup")} 
-            
-              >
-              Signup
+          <div>
+   
+            <Button className="">SUBMIT</Button>
+            <Button className="mx-3" onClick={() => handleCardChange("signup")}  >
+              SIGNUP
             </Button>
+
           </div>
         </Card>
       )}
 
       {activeCard === "signup" && (
-        <Card className="signup-card" id="signup-card">
+        <Card className="signup-card p-4" id="signup-card">
           <Card.Title id="lsignup-card-title">Signup</Card.Title>
           <div>
             <Form.Label id="form-label">Name:</Form.Label>
@@ -91,15 +89,13 @@ const LoginToggle = () => {
               />
             </InputGroup>
           </div>
-          <div >
-            <Button>Submit</Button>
-            <Button
-              className="mx-4"
-              onClick={() => handleCardChange("login")}
-             
-            >
-              Login
+          <div>
+        
+            <Button>SUBMIT</Button>
+            <Button className="mx-3" onClick={() => handleCardChange("login")}>
+              LOGIN
             </Button>
+          
           </div>
         </Card>
       )}
