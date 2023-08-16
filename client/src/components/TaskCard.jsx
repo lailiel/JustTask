@@ -30,6 +30,10 @@ const TaskCards = ({tasks}) => {
     setSelectedOption(option);
   };
 
+  const handleSubmit = () => {
+    
+  }
+
   return (
     <Card className="task-creation p-4" id="task-creation">
       <Card.Title id="login-card-title">{tasks.taskName}</Card.Title>

@@ -100,7 +100,12 @@ export const CREATE_TASK = gql`
 `;
 
 
-// export const UPDATE_TASK = gql`
-
-// `;
+export const UPDATE_TASK = gql`
+    mutation updateTaskStatus($id: ID!, $state: TaskState!) {
+        updateTaskStatus(
+            id: #id
+            state: $state
+        )
+    }
+`;
 
