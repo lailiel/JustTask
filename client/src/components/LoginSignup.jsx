@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Card, Form, InputGroup, Button } from "react-bootstrap";
 import { validateEmail } from "../components/utils/helpers";
+import { useMutation } from '@apollo/client';
+import { CREATE_USER } from '../components/graphql/mutations'
 
 const LoginToggle = () => {
   const [activeCard, setActiveCard] = useState("login");
@@ -13,8 +15,24 @@ const LoginToggle = () => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const [createUser, {error}] = useMutation(CREATE_USER)
+
+  const addUser = () => {
+    createUser({
+      variables: {
+        name: name,
+        email: email,
+        password: password
+      }
+    })
+    if (error){
+      console.log(error)
+    }
+  }
+
 
   // --------------------------------------------------------------------------
 
@@ -28,7 +46,7 @@ const LoginToggle = () => {
     } else if (inputType === "email") {
       setEmail(inputValue);
     } else {
-      setMessage(inputValue);
+      setPassword(inputValue);
     }
   };
 
@@ -47,7 +65,7 @@ const LoginToggle = () => {
         setErrorMessage("Please enter a valid email");
       }
     } else {
-      if (message == "") {
+      if (password == "") {
         setErrorMessage("Please enter password");
       }
     }
@@ -142,7 +160,7 @@ const LoginToggle = () => {
             </InputGroup>
           </div>
           <div>
-            <Button onClick={() => setErrorMessage("coming soon")}>SUBMIT</Button>
+            <Button onClick={() => [handleBlur, addUser ]}>SUBMIT</Button>
             <Button className="mx-3" onClick={() => handleCardChange("login")}>
               LOGIN
             </Button>
