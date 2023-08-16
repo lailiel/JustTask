@@ -63,11 +63,14 @@ export const CREATE_TASK = gql`
     mutation createTask (
         $taskName: String!, 
         $description: String, 
-        $priority: Int, 
+        $due: Boolean, 
         $dueDate: String, 
+        $assigned: Boolean,
+        $assignedTo: User
         $repopulate: Boolean, 
+        $repopulateValue: Int
         $dollarValue: Boolean, 
-        $dollarAmount: Float, 
+        $dollarAmount: Int, 
         $pointValue: Boolean, 
         $pointAmount: Int, 
         $state: TaskState, 
@@ -76,9 +79,12 @@ export const CREATE_TASK = gql`
             createTask (
                 taskName: $taskName
                 description: $description
-                priority: $priority 
+                due: $due, 
                 dueDate: $dueDate
+                assigned: $assigned,
+                assignedTo: $assignedTo
                 repopulate: $repopulate
+                repopulateValue: $repopulateValue
                 dollarValue: $dollarValue
                 dollarAmount: $dollarAmount
                 pointValue: $pointValue
