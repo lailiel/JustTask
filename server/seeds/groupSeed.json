@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Household1",
+        "password": "housepassword01"
+    },
+    {
+        "name": "Household2",
+        "password": "housepassword02"
+    },
+    {
+        "name": "Household3",
+        "password": "housepassword03"
+    },
+    {
+        "name": "Household4",
+        "password": "housepassword04"
+    },
+    {
+        "name": "Household5",
+        "password": "housepassword05"
+    }
+]
