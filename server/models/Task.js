@@ -7,9 +7,15 @@ const taskSchema = new Schema({
         trim: true
     },
     description: String,
-    priority: Number,
+    due: Boolean,
     dueDate: Date,
+    assigned: Boolean,
+    assignedTo: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     repopulate: Boolean,
+    repopulateValue: Number,
     dollarValue: Boolean,
     dollarAmount: Number,
     pointValue: Boolean,

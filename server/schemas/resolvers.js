@@ -60,8 +60,8 @@ const resolvers = {
             }
             return group;
         },
-        createTask: async (_, { taskName, description, priority, dueDate, repopulate, dollarValue, dollarAmount, pointValue, pointAmount, state, comment }) => {
-            const task = new Task({ taskName, description, priority, dueDate, repopulate, dollarValue, dollarAmount, pointValue, pointAmount, state, comment });
+        createTask: async (_, { taskName, description, due, dueDate, assigned, assignedTo, repopulate, repopulateValue, dollarValue, dollarAmount, pointValue, pointAmount, state, comment }) => {
+            const task = new Task({ taskName, description, due, dueDate, assigned, assignedTo, repopulate, repopulateValue, dollarValue, dollarAmount, pointValue, pointAmount, state, comment });
             await task.save();
             return task;
         },

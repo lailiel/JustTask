@@ -10,6 +10,7 @@ try{
     await clearDB('Group', 'groups');
 
     await User.create(userSeeds);
+    //--------------------------
     await Group.create(groupSeeds);
 
 console.log('Completed!');
