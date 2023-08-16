@@ -160,7 +160,7 @@ const LoginToggle = () => {
             </InputGroup>
           </div>
           <div>
-            <Button onClick={() => [handleBlur, addUser ]}>SUBMIT</Button>
+            <Button onClick={() => addUser }>SUBMIT</Button>
             <Button className="mx-3" onClick={() => handleCardChange("login")}>
               LOGIN
             </Button>
