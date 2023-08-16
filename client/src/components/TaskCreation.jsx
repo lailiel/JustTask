@@ -13,6 +13,7 @@ import { CREATE_TASK} from '../components/graphql/mutations'
 
 // --auth stuff
 // --get date select window to populate ontop of elements further down on page
+// --connect drop down assign list to group members
 
 // --------------------
 

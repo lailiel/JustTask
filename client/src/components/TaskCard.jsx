@@ -1,6 +1,7 @@
 import { Card, Button, Form, Dropdown, DropdownButton, InputGroup } from "react-bootstrap/";
 import { useState } from "react";
-import "react-datepicker/dist/react-datepicker.css";
+
+
 
 
 
@@ -13,7 +14,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 // --------------------
 
-const TaskCards = () => {
+const TaskCards = ({tasks}) => {
 
   const [completeToggle, setCompleteToggle] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -31,26 +32,22 @@ const TaskCards = () => {
 
   return (
     <Card className="task-creation p-4" id="task-creation">
-      <Card.Title id="login-card-title">Task</Card.Title>
-         {/* {completeBy && (
-            <p>Complete By : DATE</p>
-            )}
-            {group && (
+      <Card.Title id="login-card-title">{tasks.taskName}</Card.Title>
+      <p>Current Status : {tasks.state}</p>
+      <p>Complete By : {tasks.dueDate}</p>
+            {/* {group && (
             <p>Group : group </p>
-            )}
-            {assigned && (
-            <p>Assigned To : user </p>
-            )}
-            {status && (
-            <p>Current Status : or badge</p>
-            )}
-            {dollar && (
-            <p>Value : $$ </p>
-            )}
-            {points && (
-            <p>Points : 00 Pts</p>
             )} */}
-      <Card.Text>Task Description</Card.Text>
+            {/* {assigned && (
+            <p>Assigned To : user </p>
+            )} */}
+            {tasks.dollarValue && (
+            <p>Value : {tasks.dollarAmount} </p>
+            )}
+            {tasks.pointValue && (
+            <p>Points : {tasks.pointAmount} Pts</p>
+            )}
+      <Card.Text>{tasks.description}</Card.Text>
 
       <div>
         <InputGroup className="">
@@ -78,7 +75,6 @@ const TaskCards = () => {
                 name="comment"
                 id="form-control"
                 aria-describedby="basic-addon2"
-                // onBlur={handleBlur}
                 // onChange={handleInputChange}
               />
             </InputGroup>

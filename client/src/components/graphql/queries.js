@@ -29,9 +29,25 @@ query allUsers {
 // `;
 
 
-// export const QUERY_ALL_TASKS = gql`
-
-// `;
+export const QUERY_ALL_TASKS = gql`
+  query groupTasks {
+    task{
+        taskName
+        description
+        priority
+        dueDate
+        repopulate
+        dollarValue
+        dollarAmount
+        pointValue
+        pointAmount
+        state
+        comment
+        dateOflastCompletion
+        completedBy
+    }
+  }
+`;
 
 
 // export const QUERY_SINGLE_TASK = gql`
