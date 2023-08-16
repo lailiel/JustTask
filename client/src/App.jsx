@@ -5,6 +5,27 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import Nav from './components/nav'
 import routes from './main'
 import Container from 'react-bootstrap/Container'
+import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink, from } from '@apollo/client'
+
+import { onError } from '@apollo/client/link/error'
+
+const errorLink = onError(({graphqlErrors, networkError}) => {
+  if (graphqlErrors) {
+    graphqlErrors.map(({message, location, path}) =>
+    alert(`graphql error ${message}`))
+  }
+});
+
+const link = from([
+  errorLink, 
+  new HttpLink({uri: "http://localhost:3001/graphql"}),
+])
+
+const client = new ApolloClient({
+  cache: new InMemoryCache,
+  link: link 
+})
+
 
 function App() {
 
@@ -14,7 +35,7 @@ function App() {
   routes.find((route) => route.path === Location.pathname) ?? {}
 
   return (
-    <>
+    <ApolloProvider client={client}>
       <Nav/>
       <Container>
         <TransitionGroup>
@@ -34,7 +55,7 @@ function App() {
           </CSSTransition>
         </TransitionGroup>
       </Container>
-    </>
+    </ApolloProvider>
   )
 }
 

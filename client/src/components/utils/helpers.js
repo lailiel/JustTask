@@ -3,4 +3,6 @@ export function validateEmail(email) {
     return re.test(String(email).toLowerCase());
   }
 
+
+
  

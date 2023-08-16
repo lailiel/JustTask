@@ -7,11 +7,13 @@ export default function AboutPage() {
       <div className="">
         <h2>HOMEPAGE</h2>
       </div>
-      <TaskComponent/>
-
       <div id='home-text'>
-        <p>THIS IS A TEST</p>
-
+        <p>THIS IS A PRETTY COOL APP</p>
+        <p>IT HELPS YOU GET STUFF DONE!</p>
+        <p>WITHOUT SLAPPING YOUR ROOMMATES,</p>
+        <p>YOUR SPOUSE, OR YOUR CHILDREN</p>
+        <p>JUST KIDDING....</p>
+        <p>SORT OF</p>
       </div>
     </Container>
   );

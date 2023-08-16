@@ -27,7 +27,7 @@ const routes = [
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <App/>,
     children: routes.map((route) => ({
       index: route.path === '/',
       path: route.path === '/' ? undefined : route.path,
