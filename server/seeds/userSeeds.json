@@ -2,73 +2,63 @@
     {
     "name": "Cody",
     "email": "codyk@gmail.com",
-    "password": "goodpassword01",
-    "assignedTasks":[{"taskname":"Cleaning Dishes"},{"taskname":"Dusting Counter"}],
-    "completedTasks":[{"state":"completed"},{"state":"pending"}]
+    "password": "goodpassword01"
+
     },
     {
     "name": "Kate",
     "email": "katej12@gmail.com",
-    "password": "goodpassword02",
-    "assignedTasks":[{"taskname":"Washing Clothes"}],
-    "completedTasks":[{"state":"in-progress"}]
+    "password": "goodpassword02"
+
     },
     {
     "name": "Greg",
     "email": "gregf@hotmail.com",
-    "password": "goodpassword03",
-    "assignedTasks":[{"taskname":"Checking Mail"},{"taskname":"Cleaning Shower"}],
-    "completedTasks":[{"state":"completed"},{"state":"completed"}]
+    "password": "goodpassword03"
+
     },
     {
     "name": "John",
     "email": "johnv24@gmail.com",
-    "password": "goodpassword04",
-    "assignedTasks":[{"taskname":"Watering Plants"},{"taskname":"Walking Dog"}],
-    "completedTasks":[{"state":"in-progress"},{"state":"completed"}]
+    "password": "goodpassword04"
+
     },
     {
     "name": "Frank",
     "email": "franko21@gmail.com",
-    "password": "goodpassword05",
-    "assignedTasks":[{"taskname":"Cook dinner"}],
-    "completedTasks":[{"state":"completed"}]
+    "password": "goodpassword05"
+
     },
     {
     "name": "Earl",
     "email": "earlh@gmail.com",
-    "password": "goodpassword06",
-    "assignedTasks":[{"taskname":"Cook Breakfest"},{"taskname":"Buy Groceries"}],
-    "completedTasks":[{"state":"completed"},{"state":"completed"}]
+    "password": "goodpassword06"
+
     },
     {
     "name": "Welt",
     "email": "weltb@gmail.com",
-    "password": "goodpassword07",
-    "assignedTasks":[{"taskname":"Prepare Lunch"},{"taskname":"Find Remote"}],
-    "completedTasks":[{"state":"pending"},{"state":"pending"}]
+    "password": "goodpassword07"
+
     },
     {
     "name": "Jeff",
     "email": "jeffw@gmail.com",
-    "password": "goodpassword08",
-    "assignedTasks":[{"taskname":"Turn Up Heater"},{"taskname":"Clean Air Fryer"}],
-    "completedTasks":[{"state":"pending"},{"state":"pending"}]
+    "password": "goodpassword08"
+
     },
 
     {
     "name": "Heather",
     "email": "heatherl@gmail.com",
-    "password": "goodpassword09",
-    "assignedTasks":[{"taskname":"Cleaning Roof"},{"taskname":"Unclog Toilet"}],
-    "completedTasks":[{"state":"in-progress"},{"state":"in-progress"}]
+    "password": "goodpassword09"
+
     },
     {
     "name": "Patrick",
     "email": "patrickd@gmail.com",
-    "password": "goodpassword10",
-    "assignedTasks":[{"taskname":"Take Out the Trash"},{"taskname":"Sweep the Floor"}],
-    "completedTasks":[{"state":"completed"},{"state":"in-progress"}]
+    "password": "goodpassword10"
+
     }
 
 ]
