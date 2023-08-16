@@ -22,11 +22,14 @@ const typeDefs = gql`
         id: ID!
         taskName: String!
         description: String
-        priority: Int
+        due: Boolean
         dueDate: String
+        assigned: Boolean
+        assignedTo: User
         repopulate: Boolean
+        repoulateValue: Int
         dollarValue: Boolean
-        dollarAmount: Float
+        dollarAmount: Int
         pointValue: Boolean
         pointAmount: Int
         state: TaskState

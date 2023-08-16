@@ -7,16 +7,22 @@ const taskSchema = new Schema({
         trim: true
     },
     description: String,
-    priority: Number,
+    due: Boolean,
     dueDate: Date,
+    assigned: Boolean,
+    assignedTo: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     repopulate: Boolean,
+    repopulateValue: Number,
     dollarValue: Boolean,
     dollarAmount: Number,
     pointValue: Boolean,
     pointAmount: Number,
     state: {
         type: String,
-        enum: ['completed', 'in-progress', 'pending']
+        enum: ['completed', 'in-progress', 'pending', 'incomplete']
     },
     comment: String,
     dateOflastCompletion: Date,
