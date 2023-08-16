@@ -59,51 +59,45 @@ export const CREATE_USER = gql`
 // `;
 
 
-// export const CREATE_TASK = gql`
-//     mutation createTask (
-//         $taskName: String!, 
-//         $description: String, 
-//         $priority: Int, 
-//         $dueDate: String, 
-//         $repopulate: Boolean, 
-//         $dollarValue: Boolean, 
-//         $dollarAmount: Float, 
-//         $pointValue: Boolean, 
-//         $pointAmount: Int, 
-//         $state: TaskState, 
-//         $comment: String
-//             ) {
-//             createTask (
-//                 taskName: $taskName
-//                 description: $description
-//                 priority: $priority 
-//                 dueDate: $dueDate
-//                 repopulate: $repopulate
-//                 dollarValue: $dollarValue
-//                 dollarAmount: $dollarAmount
-//                 pointValue: $pointValue
-//                 pointAmount: $pointAmount
-//                 state: $state 
-//                 comment: $comment
-//             ) {
-//                 id
-//                 taskName
-//                 description
-//                 priority
-//                 dueDate
-//                 repopulate
-//                 dollarValue
-//                 dollarAmount
-//                 pointValue
-//                 pointAmount
-//                 state
-//                 comment
-//                 dateOflastCompletion
-//                 completedBy
-//             }
-//         }
+export const CREATE_TASK = gql`
+    mutation createTask (
+        $taskName: String!, 
+        $description: String, 
+        $due: Boolean, 
+        $dueDate: String, 
+        $assigned: Boolean,
+        $assignedTo: User
+        $repopulate: Boolean, 
+        $repopulateValue: Int
+        $dollarValue: Boolean, 
+        $dollarAmount: Int, 
+        $pointValue: Boolean, 
+        $pointAmount: Int, 
+        $state: TaskState, 
+        $comment: String
+            ) {
+            createTask (
+                taskName: $taskName
+                description: $description
+                due: $due, 
+                dueDate: $dueDate
+                assigned: $assigned,
+                assignedTo: $assignedTo
+                repopulate: $repopulate
+                repopulateValue: $repopulateValue
+                dollarValue: $dollarValue
+                dollarAmount: $dollarAmount
+                pointValue: $pointValue
+                pointAmount: $pointAmount
+                state: $state 
+                comment: $comment
+            ) {
+                id
+                taskName
+            }
+        }
         
-// `;
+`;
 
 
 // export const UPDATE_TASK = gql`

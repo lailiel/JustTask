@@ -2,6 +2,9 @@ import { Row, Col, Card, Button, Form, Dropdown, DropdownButton, InputGroup} fro
 import DatePicker from 'react-datepicker'
 import { useState } from "react";
 import 'react-datepicker/dist/react-datepicker.css';
+import { useMutation } from '@apollo/client';
+import { CREATE_TASK} from '../components/graphql/mutations'
+
 
 
 
@@ -10,6 +13,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 // --auth stuff
 // --get date select window to populate ontop of elements further down on page
+// --connect drop down assign list to group members
 
 // --------------------
 
@@ -17,6 +21,37 @@ import 'react-datepicker/dist/react-datepicker.css';
 const TaskCreation = () => {
 
   const [errorMessage, setErrorMessage ]= useState('');
+
+  // ---------------------------------------------------------------
+  const [createTask, {error}] = useMutation(CREATE_TASK)
+
+  const [ taskName, setTaskName ] = useState("");
+  const [ description, setDescription ] = useState("");
+  const [ dollarValue, setDollarValue ] = useState("");
+  const [ scoreValue, setScoreValue ] = useState("");
+
+  const addTask = () => {
+    createTask({
+      variables: {
+        taskName: taskName,
+        description: description,
+        due: toggleState.assignToggle,
+        dueDate: selectedDate,
+        repopulate: toggleState.repeatToggle,
+        repopulateValue: repeatValue,
+        dollarValue:  toggleState.dollarToggle,
+        dollarAmount: dollarValue,
+        pointValue: toggleState.scoreToggle,
+        pointAmount: scoreValue,
+        state: "incomplete",
+        comment: [],
+      }
+    })
+    if (error){
+      console.log(error)
+    }
+  }
+
 
   // ---------------------------------------------------------------
 
@@ -36,7 +71,6 @@ const TaskCreation = () => {
   const toggleRepeat = () => {
     setToggleState({ ...toggleState, repeatToggle: !toggleState.repeatToggle});
     setSelectedRepeat("Select")
-    // setInputValue({...inputValue, scoreValue: null})
   };
 
   const toggleAssign = () => {
@@ -46,12 +80,10 @@ const TaskCreation = () => {
 
   const toggleDollar = () => {
     setToggleState({ ...toggleState, dollarToggle: !toggleState.dollarToggle});
-    // setInputValue({...inputValue, dollarValue: null})
    };
 
   const toggleScore = () => {
     setToggleState({ ...toggleState, scoreToggle: !toggleState.scoreToggle});
-    // setInputValue({...inputValue, scoreValue: null})
   };
 
   // ---------------------------------------------------------------
@@ -62,8 +94,17 @@ const TaskCreation = () => {
   };
 
   const [selectedRepeat, setSelectedRepeat] = useState("Select");
+  const [ repeatValueInput, setRepeatValueInput ] = useState(null)
+  const [ repeatValue, setRepeatValue ] = useState(null)
   const handleRepeatSelect = (time) => {
     setSelectedRepeat(time);
+    if(selectedRepeat === 'Months') {
+      setRepeatValue(repeatValueInput * 30)
+    } else if (selectedRepeat === 'Weeks'){
+      setRepeatValue(repeatValueInput * 7)
+    } else {
+      setRepeatValue(repeatValueInput)
+    }
   };
 
 
@@ -74,11 +115,7 @@ const TaskCreation = () => {
 
   // ---------------------------------------------------------------
 
-  // const [inputValue, setInputValue] = useState({
-  //   repeatValue: "",
-  //   dollarValue: "",
-  //   scoreValue: "",
-  //   })
+  
 
   const handleKeyPress = (event) => {
     const keyCode = event.which || event.keyCode;
@@ -89,15 +126,22 @@ const TaskCreation = () => {
   };
 
 
-  // const handleInputChange = (name, value) => {
-  //   if (name === 'repeatValueField') {
-  //     setInputValue({...inputValue, repeatValue: value })
-  //   } else if (name === 'dollarValueField') {
-  //     setInputValue({...inputValue, dollarValue: value });
-  //   } else {
-  //     setInputValue({...inputValue, scoreValue: value });
-  //   }
-  // };
+  const handleInputChange = (e) => {
+    const { target } = e;
+    const inputType = target.name;
+    const inputValue = target.value;
+    if (inputType ==='task'){
+      setTaskName(inputValue)
+    } else if (inputType === 'task-description') {
+      setDescription(inputValue)
+    }else if(inputType === 'repeatValueField') {
+      setRepeatValueInput(inputValue)
+    } else if (inputType === 'dollarValueField') {
+      setDollarValue(inputValue);
+    } else {
+      setScoreValue(inputValue);
+    }
+  };
 
   // ---------------------------------------------------------------
 
@@ -112,7 +156,7 @@ const TaskCreation = () => {
           name="task"
           id="form-control"
           aria-describedby="basic-addon2"
-          // onChange={handleInputChange}
+          onChange={handleInputChange}
         />
       </InputGroup>
 
@@ -125,7 +169,7 @@ const TaskCreation = () => {
           name="task-description"
           id="form-control"
           aria-describedby="basic-addon2"
-          // onChange={handleInputChange}
+          onChange={handleInputChange}
         />
       </InputGroup>
 
@@ -166,10 +210,9 @@ const TaskCreation = () => {
               type="text"
               onKeyPress={handleKeyPress}
               name="repeatValueField"
-              // value={inputValue.repeatValue}
               className="input-field" 
               aria-label="0" 
-              // onChange={handleInputChange}
+              onChange={handleInputChange}
               />
           </>
           )}
@@ -207,11 +250,10 @@ const TaskCreation = () => {
            <Form.Control 
             type="text"
             onKeyPress={handleKeyPress}
-            // value={inputValue.dollarValue}
             name="dollarValueField"
             className="input-field" 
             aria-label="0" 
-            // onChange={handleInputChange}
+            onChange={handleInputChange}
             />
           </>
         )}
@@ -227,11 +269,10 @@ const TaskCreation = () => {
            <Form.Control 
             type="text"
             onKeyPress={handleKeyPress}
-            // value={inputValue.scoreValue}
             name="scoreValueField"
             className="input-field"
             aria-label="0" 
-            // onChange={handleInputChange}
+            onChange={handleInputChange}
             />
            <InputGroup.Text className="input-group-text">Pts</InputGroup.Text>
          </>
@@ -242,7 +283,7 @@ const TaskCreation = () => {
       </Row>
     </div>
 
-    <Button onClick={() => setErrorMessage("coming soon")}>SUBMIT</Button>
+    <Button onClick={() => addTask}>SUBMIT</Button>
     
     <div>
       {errorMessage}

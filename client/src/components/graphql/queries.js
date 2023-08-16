@@ -1,9 +1,17 @@
 import { gql } from '@apollo/client';
 
 
-// export const QUERY_ALL_USERS = gql`
-
-// `;
+export const QUERY_ALL_USERS = gql`
+query allUsers {
+    users {
+        id
+        name
+        email
+        assignedTasks
+        completedTasks
+    }
+  }
+`;
 
 
 // export const QUERY_SINGLE_USER = gql`
@@ -21,9 +29,25 @@ import { gql } from '@apollo/client';
 // `;
 
 
-// export const QUERY_ALL_TASKS = gql`
-
-// `;
+export const QUERY_ALL_TASKS = gql`
+  query groupTasks {
+    task{
+        taskName
+        description
+        priority
+        dueDate
+        repopulate
+        dollarValue
+        dollarAmount
+        pointValue
+        pointAmount
+        state
+        comment
+        dateOflastCompletion
+        completedBy
+    }
+  }
+`;
 
 
 // export const QUERY_SINGLE_TASK = gql`
