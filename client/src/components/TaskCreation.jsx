@@ -8,8 +8,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 // --------------------
 // TODO
 
-// --verify dollar/score inputs are numbers
 // --auth stuff
+// --get date select window to populate ontop of elements further down on page
 
 // --------------------
 

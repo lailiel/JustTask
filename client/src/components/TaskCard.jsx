@@ -53,7 +53,7 @@ const TaskCards = () => {
       <Card.Text>Task Description</Card.Text>
 
       <div>
-        <InputGroup className="mb-3">
+        <InputGroup className="">
           <Button onClick={() => toggleComplete(true)}>Complete</Button>
           {completeToggle && (
             <DropdownButton
@@ -61,22 +61,21 @@ const TaskCards = () => {
               title={selectedOption}
               id="input-group-dropdown-1"
             >
-              <Dropdown.Item onClick={() => [handleOptionSelect("Complete"),toggleComment(true)]}>Complete</Dropdown.Item>
-              <Dropdown.Item onClick={() => [handleOptionSelect("In Progress"),toggleComment(true)]}>In Progress</Dropdown.Item>
-              <Dropdown.Item onClick={() => [handleOptionSelect("Pending"),toggleComment(true)]}>Pending</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleOptionSelect("Complete")}>Complete</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleOptionSelect("In Progress")}>In Progress</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleOptionSelect("Pending")}>Pending</Dropdown.Item>
             </DropdownButton>
           )}
         </InputGroup>
 
         {completeToggle && (
           <div>
-            <Form.Label id="form-label">Task Description:</Form.Label>
+            <Form.Label id="form-label" className="mt-3">Comment:</Form.Label>
             <InputGroup className="mb-3">
               <Form.Control
-                placeholder="Task Description"
                 as="textarea"
-                aria-label="Task Description"
-                name="task-description"
+                aria-label="Comment"
+                name="comment"
                 id="form-control"
                 aria-describedby="basic-addon2"
                 // onBlur={handleBlur}
