@@ -80,17 +80,13 @@ const TaskCreation = () => {
   //   scoreValue: "",
   //   })
 
-
-
-  // const handleBlur = (name, value) => {
-  //   if (isNaN(value)) {
-  //     setErrorMessage("Please enter a numerical value");
-  //     } else {
-  //       setErrorMessage("");
-  //       setInputValue({...inputValue, [name]: value,
-  //       });
-  //   }
-  // };
+  const handleKeyPress = (event) => {
+    const keyCode = event.which || event.keyCode;
+    const isValidKey = (keyCode >= 48 && keyCode <= 57) || keyCode === 8 || keyCode === 46;
+    if (!isValidKey) {
+      event.preventDefault();
+    }
+  };
 
 
   // const handleInputChange = (name, value) => {
@@ -116,7 +112,6 @@ const TaskCreation = () => {
           name="task"
           id="form-control"
           aria-describedby="basic-addon2"
-          // onBlur={handleBlur}
           // onChange={handleInputChange}
         />
       </InputGroup>
@@ -130,7 +125,6 @@ const TaskCreation = () => {
           name="task-description"
           id="form-control"
           aria-describedby="basic-addon2"
-          // onBlur={handleBlur}
           // onChange={handleInputChange}
         />
       </InputGroup>
@@ -169,12 +163,12 @@ const TaskCreation = () => {
               <Dropdown.Item onClick={() => handleRepeatSelect("Months")}>Months</Dropdown.Item>
             </DropdownButton>
             <Form.Control 
-              // type="text"
-              // name="repeatValueField"
+              type="text"
+              onKeyPress={handleKeyPress}
+              name="repeatValueField"
               // value={inputValue.repeatValue}
               className="input-field" 
               aria-label="0" 
-              // onBlur={(e) => handleBlur("repeatValue", e.target.value)}
               // onChange={handleInputChange}
               />
           </>
@@ -211,12 +205,12 @@ const TaskCreation = () => {
           <>
            <InputGroup.Text className="input-group-text">$</InputGroup.Text>
            <Form.Control 
-            // type="text"
+            type="text"
+            onKeyPress={handleKeyPress}
             // value={inputValue.dollarValue}
-            // name="dollarValueField"
+            name="dollarValueField"
             className="input-field" 
             aria-label="0" 
-            // onBlur={(e) => handleBlur("dollarValue", e.target.value)}
             // onChange={handleInputChange}
             />
           </>
@@ -231,12 +225,12 @@ const TaskCreation = () => {
         {toggleState.scoreToggle && (
            <>
            <Form.Control 
-            // type="text"
+            type="text"
+            onKeyPress={handleKeyPress}
             // value={inputValue.scoreValue}
-            // name="scoreValueField"
+            name="scoreValueField"
             className="input-field"
             aria-label="0" 
-            // onBlur={(e) => handleBlur("scoreValue", e.target.value)}
             // onChange={handleInputChange}
             />
            <InputGroup.Text className="input-group-text">Pts</InputGroup.Text>
