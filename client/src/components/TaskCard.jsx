@@ -34,13 +34,16 @@ const TaskCards = ({tasks}) => {
     <Card className="task-creation p-4" id="task-creation">
       <Card.Title id="login-card-title">{tasks.taskName}</Card.Title>
       <p>Current Status : {tasks.state}</p>
-      <p>Complete By : {tasks.dueDate}</p>
+            {tasks.due && (
+            <p>Complete By : {tasks.dueDate}</p>
+            )}
+      
             {/* {group && (
             <p>Group : group </p>
             )} */}
-            {/* {assigned && (
-            <p>Assigned To : user </p>
-            )} */}
+            {tasks.assigned && (
+            <p>Assigned To : {tasks.assignedTo} </p>
+            )}
             {tasks.dollarValue && (
             <p>Value : {tasks.dollarAmount} </p>
             )}

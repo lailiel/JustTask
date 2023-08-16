@@ -35,9 +35,10 @@ const TaskCreation = () => {
       variables: {
         taskName: taskName,
         description: description,
-        priority: 1,
+        due: toggleState.assignToggle,
         dueDate: selectedDate,
         repopulate: toggleState.repeatToggle,
+        repopulateValue: repeatValue,
         dollarValue:  toggleState.dollarToggle,
         dollarAmount: dollarValue,
         pointValue: toggleState.scoreToggle,
@@ -93,8 +94,17 @@ const TaskCreation = () => {
   };
 
   const [selectedRepeat, setSelectedRepeat] = useState("Select");
+  const [ repeatValueInput, setRepeatValueInput ] = useState(null)
+  const [ repeatValue, setRepeatValue ] = useState(null)
   const handleRepeatSelect = (time) => {
     setSelectedRepeat(time);
+    if(selectedRepeat === 'Months') {
+      setRepeatValue(repeatValueInput * 30)
+    } else if (selectedRepeat === 'Weeks'){
+      setRepeatValue(repeatValueInput * 7)
+    } else {
+      setRepeatValue(repeatValueInput)
+    }
   };
 
 
@@ -125,7 +135,7 @@ const TaskCreation = () => {
     } else if (inputType === 'task-description') {
       setDescription(inputValue)
     }else if(inputType === 'repeatValueField') {
-      setInputValue({...inputValue, repeatValue: value })
+      setRepeatValueInput(inputValue)
     } else if (inputType === 'dollarValueField') {
       setDollarValue(inputValue);
     } else {
