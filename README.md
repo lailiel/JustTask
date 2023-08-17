@@ -17,7 +17,7 @@
   [Questions](#questions)
 
   ## Description
-  A todo list site where a user can log in and make a group with multiple other users. Tasks can be assigned to users of the group with priority, due date, task name, money reward amount, and task description. The site will repopulate with the most recent tasks.
+  A todo list site where a user can log in and make a group with multiple other users. Tasks can be assigned to users of the group with due date, task name, money reward amount, and task description. The site will repopulate with the most recent tasks.
 
   ## Installation 
   N/A
