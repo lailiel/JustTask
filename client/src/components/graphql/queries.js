@@ -1,18 +1,11 @@
 import { gql } from '@apollo/client';
 
 
-export const QUERY_ALL_USERS = gql`
-query Query {
+export const QUERY_USER_NAMES = gql`
+query ExampleQuery {
     users {
       name
       id
-      email
-      completedTasks {
-        taskName
-      }
-      assignedTasks {
-        taskName
-      }
     }
   }
 `;

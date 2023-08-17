@@ -1,13 +1,13 @@
 import { Row, Col, Card, Button, Form, Dropdown, DropdownButton, InputGroup} from "react-bootstrap/";
 import DatePicker from 'react-datepicker'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import 'react-datepicker/dist/react-datepicker.css';
 import { useMutation } from '@apollo/client';
 import { CREATE_TASK} from '../components/graphql/mutations';
 import { useQuery } from '@apollo/client';
 // import { QUERY_GROUP_MEMBERS } from '../components/graphql/queries'
-import { QUERY_ALL_USERS } from '../components/graphql/queries'
-import { formatDate } from '../components/utils/dateFormat'
+import { QUERY_USER_NAMES } from '../components/graphql/queries'
+
 
 
 // --------------------
@@ -24,8 +24,8 @@ const TaskCreation = () => {
 
   const [errorMessage, setErrorMessage ]= useState('');
 
-  const { data } = useQuery(QUERY_ALL_USERS);
-  const users = data?.name || [] ;
+  const { data } = useQuery(QUERY_USER_NAMES);
+  const userNames = data?.users || [] ;
   
 
   // ---------------------------------------------------------------
@@ -41,10 +41,10 @@ const TaskCreation = () => {
       {
         taskName: taskName,
         description: description,
-        due: toggleState.assignToggle,
+        due: toggleState.dateToggle,
         dueDate: selectedDate,
-        assigned: false,
-        assignedTo: {id: "64dd6dd28615a74582ed75bc" },
+        assigned: toggleState.assignToggle,
+        assignedTo: selectedUserID,
         repopulate: toggleState.repeatToggle,
         repopulateValue: parseInt(repeatValue, 10),
         dollarValue:  toggleState.dollarToggle,
@@ -85,7 +85,7 @@ const TaskCreation = () => {
   const toggleAssign = () => {
     setToggleState({ ...toggleState, assignToggle: !toggleState.assignToggle});
     setSelectedUser("Assign To")
-    console.log(users)
+    console.log(userNames)
   };
 
   const toggleDollar = () => {
@@ -99,9 +99,15 @@ const TaskCreation = () => {
   // ---------------------------------------------------------------
 
   const [selectedUser, setSelectedUser] = useState("Assign To");
-  const handleUserSelect = (user) => {
-    setSelectedUser(user);
+  const [selectedUserID, setSelectedUserID] = useState("");
+  const handleUserSelect = (userName, id) => {
+    setSelectedUser(userName);
+    setSelectedUserID(id)
   };
+
+  useEffect(() => {
+    console.log(selectedUser, selectedUserID); // This will log the updated selectedUser
+  }, [selectedUser]);
 
   const [selectedRepeat, setSelectedRepeat] = useState("Select");
   const [ repeatValueInput, setRepeatValueInput ] = useState(null)
@@ -240,8 +246,8 @@ const TaskCreation = () => {
             variant="outline-secondary"
             title={selectedUser}
             id="input-group-dropdown-1">
-              {users.map(user => (
-                <Dropdown.Item onClick={() => handleUserSelect(user)}>{user}</Dropdown.Item>
+              {userNames.map(user => (
+                <Dropdown.Item key={user.id} onClick={() => handleUserSelect(user.name, user.id)}>{user.name}</Dropdown.Item>
               ))}
           </DropdownButton>
         

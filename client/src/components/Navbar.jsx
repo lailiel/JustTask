@@ -33,6 +33,7 @@ export default function CustomNavbar() {
             {AuthService.loggedIn() ? (
             <>
             <Link className="nav-link" to="/dashboard">DASHBOARD</Link>
+            <Link className="nav-link" to="/completed">COMPLETED</Link>
             {/* <Link className="nav-link" to="/user">USER</Link> */}
             {/* <Link className="nav-link" to="/group">GROUP</Link> */}
             <Link className="nav-link" to="/task">ADD TASK</Link>

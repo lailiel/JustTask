@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
 // import UserPage from './pages/UserPage';
 // import GroupPage from './pages/GroupPage';
+import CompletedPage from './pages/Completed';
 import TaskPage from './pages/TaskPage';
 import LoginPage from './pages/LoginPage';
 
@@ -19,6 +20,7 @@ const routes = [
   { path: 'dashboard', element: <DashboardPage />, nodeRef: createRef(), },
   // { path: 'user', element: <UserPage />, nodeRef: createRef(), },
   // { path: 'group', element: <GroupPage />, nodeRef: createRef(), },
+  { path: 'completed', element: <CompletedPage />, nodeRef: createRef(), },
   { path: 'task', element: <TaskPage />, nodeRef: createRef(), },
   { path: 'login', element: <LoginPage />, nodeRef: createRef(), },
 ]
