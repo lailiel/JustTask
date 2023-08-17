@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
 import TaskComponent from '../components/TaskCreation'
 
-export default function AboutPage() {
+export default function HomePage() {
   return (
     <Container fluid className="p-5" id="homepage">
       <div className="">
