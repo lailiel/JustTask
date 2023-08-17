@@ -32,6 +32,7 @@ query allUsers {
 export const QUERY_ALL_TASKS = gql`
   query groupTasks {
     task{
+        id
         taskName
         description
         priority

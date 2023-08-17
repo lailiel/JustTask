@@ -10,11 +10,8 @@ export default function AboutPage() {
       <div className="">
         <h2>DASHBOARD</h2>
       </div>
-      <TaskCards/>
-
+      
       <div id='dashboard-text'>
-   
-
       </div>
     </Container>
   );
