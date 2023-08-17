@@ -72,10 +72,11 @@ const resolvers = {
             await task.save();
             return task;
         },
-        updateTaskStatus: async (parent, { id, state }) => {
+        updateTaskStatus: async (parent, { id, state, comment }) => {
             const task = await Task.findById(id);
             if (task) {
                 task.state = state;
+                task.comment = comment;
                 await task.save();
             }
             return task;
