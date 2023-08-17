@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/client';
 import { CREATE_TASK} from '../components/graphql/mutations';
 import { useQuery } from '@apollo/client';
 // import { QUERY_GROUP_MEMBERS } from '../components/graphql/queries'
-import { QUERY_USER_NAMES } from '../components/graphql/queries'
+import { QUERY_USER_NAMES } from '../components/graphql/queries';
 
 
 
@@ -14,7 +14,7 @@ import { QUERY_USER_NAMES } from '../components/graphql/queries'
 // TODO
 
 // --auth stuff
-// --get date select window to populate ontop of elements further down on page
+// --get date select window to populate on top of elements further down on page
 // --connect drop down assign list to group members
 
 // --------------------
@@ -29,7 +29,7 @@ const TaskCreation = () => {
   
 
   // ---------------------------------------------------------------
-  const [createTask, {error}] = useMutation(CREATE_TASK)
+  const [createTask, {error}] = useMutation(CREATE_TASK);
 
   const [ taskName, setTaskName ] = useState("");
   const [ description, setDescription ] = useState("");
@@ -56,10 +56,10 @@ const TaskCreation = () => {
       }
     })
     if (error){
-      console.log(error)
+      console.log(error);
     }
-   window.location.assign('/dashboard')
-  }
+   window.location.assign('/dashboard');
+  };
 
 
   // ---------------------------------------------------------------
@@ -70,16 +70,16 @@ const TaskCreation = () => {
   assignToggle: false,
   dollarToggle: false,
   scoreToggle: false,
-  })
+  });
 
   const toggleDate = () => {
     setToggleState({ ...toggleState, dateToggle: !toggleState.dateToggle});
-    setSelectedDate(null)
+    setSelectedDate(null);
   };
 
   const toggleRepeat = () => {
     setToggleState({ ...toggleState, repeatToggle: !toggleState.repeatToggle});
-    setSelectedRepeat("Select")
+    setSelectedRepeat("Select");
   };
 
   const toggleAssign = () => {
