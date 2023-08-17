@@ -1,6 +1,6 @@
 import Container from "react-bootstrap/Container";
 
-export default function AboutPage() {
+export default function UserPage() {
   return (
     <Container fluid className="p-5" id="user-page">
       <div className="">

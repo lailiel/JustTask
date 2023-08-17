@@ -15,7 +15,6 @@ export const CREATE_USER = gql`
                 name
             }
         }
-
 `;
 
 
@@ -44,8 +43,6 @@ export const CREATE_USER = gql`
 //                 tasks
 //             }
 //         }
-
-
 // `;
 
 
@@ -100,7 +97,13 @@ export const CREATE_TASK = gql`
 `;
 
 
-// export const UPDATE_TASK = gql`
-
-// `;
+export const UPDATE_TASK = gql`
+    mutation updateTaskStatus($id: ID!, $state: TaskState! $comment: Comment) {
+        updateTaskStatus(
+            id: #id
+            state: $state
+            comment: $comment
+        )
+    }
+`;
 
