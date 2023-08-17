@@ -20,25 +20,35 @@ const TaskCards = ({tasks}) => {
   const [updateTask, {error}] = useMutation(UPDATE_TASK)
   const [taskComment, setTaskComment] = useState("")
   const today = new Date()
+  const formattedDate = formatDate(today)
 
-  const updateTaskStatus = () => {
+
+  const updateTaskStatus = (taskId) => {
+    if (selectedOption === "Select") {
+      setErrorMessage('Select a complete option')
+    } else{
     updateTask({
       variables: {
-        id: tasks.id,
+        updateTaskStatusId: taskId,
         state: selectedOption,
         comment: taskComment,
-        dateOflastCompletion: today
-        // completedBy: 
+        dateOflastCompletion: formattedDate,
+        completedBy: null
       }
     })
+    console.log(taskId, selectedOption, taskComment, formattedDate)
     if (error){
       console.log(error)
-    }
+    } 
+    window.location.reload()
+  } 
   }
 
   const [completeToggle, setCompleteToggle] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedOption, setSelectedOption] = useState("Select");
+  const [selectedText, setSelectedText] = useState("Select");
+
 
   const toggleComplete = () => {
     setCompleteToggle(!completeToggle);
@@ -46,21 +56,16 @@ const TaskCards = ({tasks}) => {
     setErrorMessage("")
   };
 
-   const handleOptionSelect = (option) => {
+   const handleOptionSelect = (option, text) => {
     setSelectedOption(option);
+    setSelectedText(text)
+     };
+
+  const handleInputChange = (event) => {
+    setTaskComment(event.target.value);
   };
 
-  const handleInputChange = (comment) => {
-    setTaskComment(comment);
-  };
 
-  const handleSubmit = () => {
-    if (selectedOption !== "Select") {
-      updateTaskStatus
-    } else {
-      setErrorMessage("Select a complete option")
-    }
-  }
 
   return (
     <Card className="task-creation p-4 mb-4" id="task-creation">
@@ -71,10 +76,6 @@ const TaskCards = ({tasks}) => {
             {tasks.due && (
             <p>Complete By : {formatDate(tasks.dueDate)}</p>
             )}
-      
-            {/* {group && (
-            <p>Group : group </p>
-            )} */}
             {tasks.assigned && (
             <p>Assigned To : {tasks.assignedTo} </p>
             )}
@@ -84,6 +85,12 @@ const TaskCards = ({tasks}) => {
             {tasks.pointValue && (
             <p>Points : {tasks.pointAmount} Pts</p>
             )}
+            {tasks.comment && (
+            <p>Comment : {tasks.comment} </p>
+            )}
+            {tasks.dateOflastCompletion && (
+            <p>Last Done : {formatDate(tasks.dateOflastCompletion)}</p>
+            )}
       <Card.Text>{tasks.description}</Card.Text>
 
       <div>
@@ -92,12 +99,12 @@ const TaskCards = ({tasks}) => {
           {completeToggle && (
             <DropdownButton
               variant="outline-secondary"
-              title={selectedOption}
+              title={selectedText}
               id="input-group-dropdown-1"
             >
-              <Dropdown.Item onClick={() => handleOptionSelect("Complete")}>Complete</Dropdown.Item>
-              <Dropdown.Item onClick={() => handleOptionSelect("In Progress")}>In Progress</Dropdown.Item>
-              <Dropdown.Item onClick={() => handleOptionSelect("Pending")}>Pending</Dropdown.Item>
+              <Dropdown.Item onClick={() => [handleOptionSelect("completed", "Complete"), ]}>Complete</Dropdown.Item>
+              <Dropdown.Item onClick={() => [handleOptionSelect("in_progress", "In Progress"), ]}>In Progress</Dropdown.Item>
+              <Dropdown.Item onClick={() => [handleOptionSelect("pending", "Pending"), ]}>Pending</Dropdown.Item>
             </DropdownButton>
           )}
         </InputGroup>
@@ -115,7 +122,7 @@ const TaskCards = ({tasks}) => {
                 onChange={handleInputChange}
               />
             </InputGroup>
-            <Button onClick={() => handleSubmit}>
+            <Button onClick={() => updateTaskStatus(tasks.id)}>
               SUBMIT
             </Button>
             <div>{errorMessage}</div>

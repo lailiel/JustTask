@@ -105,8 +105,8 @@ export const CREATE_TASK = gql`
 
 
 export const UPDATE_TASK = gql`
-mutation UpdateTaskStatus($state: TaskState!, $comment: String!, $updateTaskStatusId: ID!) {
-    updateTaskStatus(state: $state, comment: $comment, id: $updateTaskStatusId) {
+mutation UpdateTaskStatus($state: TaskState!, $comment: String!, $updateTaskStatusId: ID!, $dateOflastCompletion: Date, $completedBy: UserInput) {
+    updateTaskStatus(state: $state, comment: $comment, id: $updateTaskStatusId, dateOflastCompletion: $dateOflastCompletion, completedBy: $completedBy) {
       state
       comment
       dateOflastCompletion
