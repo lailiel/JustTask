@@ -1,7 +1,8 @@
-import { Card, Button, Form, Dropdown, DropdownButton, InputGroup } from "react-bootstrap/";
+import { Card, Button, Form, Dropdown, DropdownButton, InputGroup, Container } from "react-bootstrap/";
 import { useState } from "react";
 import { useMutation } from '@apollo/client';
 import { UPDATE_TASK} from '../components/graphql/mutations'
+import { formatDate } from '../components/utils/dateFormat'
 
 
 
@@ -10,8 +11,6 @@ import { UPDATE_TASK} from '../components/graphql/mutations'
 // --------------------
 // TODO
 
-// --add error message for submit on click for if complete = 'select'
-// --conditional rendering of group name
 // --auth stuff
 
 // --------------------
@@ -20,23 +19,36 @@ const TaskCards = ({tasks}) => {
 
   const [updateTask, {error}] = useMutation(UPDATE_TASK)
   const [taskComment, setTaskComment] = useState("")
+  const today = new Date()
+  const formattedDate = formatDate(today)
 
-  const updateTaskStatus = () => {
+
+  const updateTaskStatus = (taskId) => {
+    if (selectedOption === "Select") {
+      setErrorMessage('Select a complete option')
+    } else{
     updateTask({
       variables: {
-        id: tasks.id,
+        updateTaskStatusId: taskId,
         state: selectedOption,
-        comment: taskComment
+        comment: taskComment,
+        dateOflastCompletion: formattedDate,
+        completedBy: null
       }
     })
+    console.log(taskId, selectedOption, taskComment, formattedDate)
     if (error){
       console.log(error)
-    }
+    } 
+    window.location.reload()
+  } 
   }
 
   const [completeToggle, setCompleteToggle] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedOption, setSelectedOption] = useState("Select");
+  const [selectedText, setSelectedText] = useState("Select");
+
 
   const toggleComplete = () => {
     setCompleteToggle(!completeToggle);
@@ -44,54 +56,57 @@ const TaskCards = ({tasks}) => {
     setErrorMessage("")
   };
 
-   const handleOptionSelect = (option) => {
+   const handleOptionSelect = (option, text) => {
     setSelectedOption(option);
+    setSelectedText(text)
+     };
+
+  const handleInputChange = (event) => {
+    setTaskComment(event.target.value);
   };
 
-  const handleInputChange = (comment) => {
-    setTaskComment(comment);
-  };
-
-  const handleSubmit = () => {
-    if (selectedOption !== "Select") {
-      updateTaskStatus
-    }
-  }
-
+  
+ 
   return (
-    <Card className="task-creation p-4" id="task-creation">
+    <Card className="task-creation p-4 mb-4" id="task-creation">
       <Card.Title id="login-card-title">{tasks.taskName}</Card.Title>
-      <p>Current Status : {tasks.state}</p>
+            {tasks.state !== "incomplete" && (
+            <p className="m-0">Current Status : {tasks.state}</p>
+            )}
             {tasks.due && (
-            <p>Complete By : {tasks.dueDate}</p>
+            <p className="m-0">Complete By : {formatDate(tasks.dueDate)}</p>
             )}
-      
-            {/* {group && (
-            <p>Group : group </p>
-            )} */}
             {tasks.assigned && (
-            <p>Assigned To : {tasks.assignedTo} </p>
+            <p className="m-0">Assigned To : {tasks.assignedTo} </p>
             )}
+            {tasks.description && (
+          <Card.Text className="p-2 my-2 task-description">{tasks.description}</Card.Text>
+            )}
+           
             {tasks.dollarValue && (
-            <p>Value : {tasks.dollarAmount} </p>
+            <p className="m-0">Dollar Value : ${tasks.dollarAmount} </p>
             )}
             {tasks.pointValue && (
-            <p>Points : {tasks.pointAmount} Pts</p>
+            <p className="m-0">Points : {tasks.pointAmount} Pts</p>
             )}
-      <Card.Text>{tasks.description}</Card.Text>
-
+            {tasks.comment && (
+            <p className="m-0">Comment : {tasks.comment} </p>
+            )}
+            {tasks.state === "completed" && (
+            <p className="m-0">Last Done : {formatDate(tasks.dateOflastCompletion)}</p>
+            )}
       <div>
-        <InputGroup className="">
-          <Button onClick={() => toggleComplete(true)}>Complete</Button>
+        <InputGroup className="mt-3">
+          <Button  onClick={() => toggleComplete(true)}>Complete</Button>
           {completeToggle && (
             <DropdownButton
               variant="outline-secondary"
-              title={selectedOption}
+              title={selectedText}
               id="input-group-dropdown-1"
             >
-              <Dropdown.Item onClick={() => handleOptionSelect("Complete")}>Complete</Dropdown.Item>
-              <Dropdown.Item onClick={() => handleOptionSelect("In Progress")}>In Progress</Dropdown.Item>
-              <Dropdown.Item onClick={() => handleOptionSelect("Pending")}>Pending</Dropdown.Item>
+              <Dropdown.Item onClick={() => [handleOptionSelect("completed", "Complete"), ]}>Complete</Dropdown.Item>
+              <Dropdown.Item onClick={() => [handleOptionSelect("inprogress", "In Progress"), ]}>In Progress</Dropdown.Item>
+              <Dropdown.Item onClick={() => [handleOptionSelect("pending", "Pending"), ]}>Pending</Dropdown.Item>
             </DropdownButton>
           )}
         </InputGroup>
@@ -109,7 +124,7 @@ const TaskCards = ({tasks}) => {
                 onChange={handleInputChange}
               />
             </InputGroup>
-            <Button onClick={() => handleSubmit}>
+            <Button onClick={() => updateTaskStatus(tasks.id)}>
               SUBMIT
             </Button>
             <div>{errorMessage}</div>

@@ -1,11 +1,17 @@
-const User = require('../models/User');
-const Group = require('../models/Group');
-const Task = require('../models/Task');
+const { User, Group, Task } = require('../models');
+
+const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
+
+    Date: {
+        serialize: (value) => value.toISOString(),
+        parseValue: (value) => new Date(value),
+        parseLiteral: (ast) => new Date(ast.value),
+      },
     Query: {
         users: async () => {
-            return await User.find({});
+            return await User.find();
         },
         user: async (parent, { id }) => {
             return await User.findById(id);
@@ -17,7 +23,7 @@ const resolvers = {
             return await Group.findById(id);
         },
         tasks: async () => {
-            return await Task.find({});
+            return await Task.find();
         },
         task: async (parent, { id }) => {
             return await Task.findById(id);
@@ -39,6 +45,23 @@ const resolvers = {
             }
             return false;
         },
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+      
+            if (!user) {
+              throw AuthenticationError;
+            }
+      
+            const correctPw = await user.isCorrectPassword(password);
+      
+            if (!correctPw) {
+              throw AuthenticationError;
+            }
+      
+            const token = signToken(user);
+      
+            return { token, user };
+          },
         createGroup: async (parent, { name, owners, participants, tasks }) => {
             const group = new Group({ name, owners, participants, tasks });
             await group.save();
@@ -61,14 +84,16 @@ const resolvers = {
             return group;
         },
         createTask: async (parent, { taskName, description, due, dueDate, assigned, assignedTo, repopulate, repopulateValue, dollarValue, dollarAmount, pointValue, pointAmount, state, comment }) => {
-            const task = new Task({ taskName, description, due, dueDate, assigned, assignedTo, repopulate, repopulateValue, dollarValue, dollarAmount, pointValue, pointAmount, state, comment });
+            const assignedUser = User.findById(assignedTo.id)
+            const task = new Task({ taskName, description, due, dueDate, assigned, assignedUser, repopulate, repopulateValue, dollarValue, dollarAmount, pointValue, pointAmount, state, comment });
             await task.save();
             return task;
         },
-        updateTaskStatus: async (parent, { id, state }) => {
+        updateTaskStatus: async (parent, { id, state, comment }) => {
             const task = await Task.findById(id);
             if (task) {
                 task.state = state;
+                task.comment = comment;
                 await task.save();
             }
             return task;

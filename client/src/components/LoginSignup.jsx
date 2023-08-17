@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { Card, Form, InputGroup, Button } from "react-bootstrap";
 import { validateEmail } from "../components/utils/helpers";
 import { useMutation } from '@apollo/client';
-import { CREATE_USER } from '../components/graphql/mutations'
+import { CREATE_USER , LOGIN_USER} from '../components/graphql/mutations'
+import  AuthService  from '../components/utils/auth';
+
+
 
 const LoginToggle = () => {
   const [activeCard, setActiveCard] = useState("login");
@@ -18,21 +21,43 @@ const LoginToggle = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [createUser, {error}] = useMutation(CREATE_USER)
+  const [createUser, { error }] = useMutation(CREATE_USER)
 
   const addUser = () => {
-    createUser({
-      variables: {
+    console.log(name, email, password)
+    createUser( {variables:
+      {
         name: name,
         email: email,
         password: password
-      }
-    })
+    }})
     if (error){
       console.log(error)
     }
+    window.location.assign('/dashboard');
   }
+  // --------------------------------------------------------
 
+  const [login, { data }] = useMutation(LOGIN_USER);
+
+  
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    console.log(email, password);
+    try {
+      const { data } = await login({
+        variables: { 
+          email: email,
+          password: password
+        },
+      });
+
+      AuthService.login(data.login.token);
+    } catch (e) {
+      console.error(e);
+    }
+    window.location.assign('/dashboard')
+  }
 
   // --------------------------------------------------------------------------
 
@@ -85,7 +110,8 @@ const LoginToggle = () => {
                 placeholder="example@email.com"
                 aria-label="Email"
                 name="email"
-                id="form-control"
+                type="email"
+                className="form-control"
                 aria-describedby="basic-addon2"
                 onBlur={handleBlur}
                 onChange={handleInputChange}
@@ -98,7 +124,8 @@ const LoginToggle = () => {
                 placeholder="Password"
                 aria-label="Password"
                 name="password"
-                id="form-control"
+                type="password"
+                className="form-control"
                 aria-describedby="basic-addon2"
                 onBlur={handleBlur}
                 onChange={handleInputChange}
@@ -106,7 +133,7 @@ const LoginToggle = () => {
             </InputGroup>
           </div>
           <div>
-            <Button onClick={() => setErrorMessage("coming soon")}>SUBMIT</Button>
+            <Button onClick={ handleLogin }>SUBMIT</Button>
             <Button className="mx-3" onClick={() => handleCardChange("signup")}>
               SIGNUP
             </Button>
@@ -127,7 +154,7 @@ const LoginToggle = () => {
                 placeholder="Name"
                 aria-label="Name"
                 name="name"
-                id="form-control"
+                className="form-control"
                 aria-describedby="basic-addon2"
                 onBlur={handleBlur}
                 onChange={handleInputChange}
@@ -139,7 +166,8 @@ const LoginToggle = () => {
                 placeholder="example@email.com"
                 aria-label="Email"
                 name="email"
-                id="form-control"
+                type="email"
+                className="form-control"
                 aria-describedby="basic-addon2"
                 onBlur={handleBlur}
                 onChange={handleInputChange}
@@ -152,6 +180,7 @@ const LoginToggle = () => {
                 placeholder="Password"
                 aria-label="Password"
                 name="password"
+                type="password"
                 id="form-control"
                 aria-describedby="basic-addon2"
                 onBlur={handleBlur}
@@ -160,7 +189,7 @@ const LoginToggle = () => {
             </InputGroup>
           </div>
           <div>
-            <Button onClick={() => addUser }>SUBMIT</Button>
+            <Button onClick={ addUser }>SUBMIT</Button>
             <Button className="mx-3" onClick={() => handleCardChange("login")}>
               LOGIN
             </Button>

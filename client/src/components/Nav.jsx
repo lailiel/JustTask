@@ -1,12 +1,18 @@
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import React, { useState } from 'react';
+import AuthService from '../components/utils/auth'
 
 
 
 export default function CustomNavbar() {
 
   const [expanded, setExpanded] = useState(false);
+
+  const logout = (event) => {
+    event.preventDefault();
+    AuthService.logout();
+  };
 
   const closeNavbar= () => {
     setExpanded(false);
@@ -25,10 +31,18 @@ export default function CustomNavbar() {
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end" onClick={closeNavbar}>
           <Nav id='nav-list' >
             <Link className="nav-link" to="/dashboard">DASHBOARD</Link>
-            <Link className="nav-link" to="/user">USER</Link>
-            <Link className="nav-link" to="/group">GROUP</Link>
-            <Link className="nav-link" to="/task">TASK</Link>
+            {/* <Link className="nav-link" to="/user">USER</Link> */}
+            {/* <Link className="nav-link" to="/group">GROUP</Link> */}
+            <Link className="nav-link" to="/task">ADD TASK</Link>
+            {AuthService.loggedIn() ? (
+            <>
+              <button className="nav-link" onClick={logout}>
+                LOGOUT
+              </button>
+            </>
+          ): (
             <Link className="nav-link" to="/login">LOGIN</Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
