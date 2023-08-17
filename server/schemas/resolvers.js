@@ -11,22 +11,22 @@ const resolvers = {
       },
     Query: {
         users: async () => {
-            return await User.find();
+            return await User.find({}).populate('tasks').populate('groups');
         },
         user: async (parent, { id }) => {
-            return await User.findById(id);
+            return await User.findById(id).populate('tasks').populate('groups');
         },
         groups: async () => {
-            return await Group.find({});
+            return await Group.find({}).populate('owners').populate('participants').populate('tasks');
         },
         group: async (parent, { id }) => {
-            return await Group.findById(id);
+            return await Group.findById(id).populate('owners').populate('participants').populate('tasks');
         },
         tasks: async () => {
-            return await Task.find();
+            return await Task.find({}).populate('taskName');
         },
         task: async (parent, { id }) => {
-            return await Task.findById(id);
+            return await Task.findById(id).populate('taskName');
         }
     },
     Mutation: {
