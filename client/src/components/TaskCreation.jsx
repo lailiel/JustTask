@@ -7,6 +7,7 @@ import { CREATE_TASK} from '../components/graphql/mutations';
 import { useQuery } from '@apollo/client';
 // import { QUERY_GROUP_MEMBERS } from '../components/graphql/queries'
 import { QUERY_ALL_USERS } from '../components/graphql/queries'
+import { formatDate } from '../components/utils/dateFormat'
 
 
 // --------------------
@@ -119,7 +120,8 @@ const TaskCreation = () => {
 
   const [selectedDate, setSelectedDate] = useState(null);
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    formatDate(date)
+    setSelectedDate(formatDate);
   };
 
   // ---------------------------------------------------------------

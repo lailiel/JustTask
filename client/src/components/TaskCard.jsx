@@ -1,7 +1,8 @@
 import { Card, Button, Form, Dropdown, DropdownButton, InputGroup } from "react-bootstrap/";
 import { useState } from "react";
-// import { useMutation } from '@apollo/client';
-// import { UPDATE_TASK} from '../components/graphql/mutations'
+import { useMutation } from '@apollo/client';
+import { UPDATE_TASK} from '../components/graphql/mutations'
+import { formatDate } from '../components/utils/dateFormat'
 
 
 
@@ -16,21 +17,24 @@ import { useState } from "react";
 
 const TaskCards = ({tasks}) => {
 
-  // const [updateTask, {error}] = useMutation(UPDATE_TASK)
-  // const [taskComment, setTaskComment] = useState("")
+  const [updateTask, {error}] = useMutation(UPDATE_TASK)
+  const [taskComment, setTaskComment] = useState("")
+  const today = new Date()
 
-  // const updateTaskStatus = () => {
-  //   updateTask({
-  //     variables: {
-  //       id: tasks.id,
-  //       state: selectedOption,
-  //       comment: taskComment
-  //     }
-  //   })
-  //   if (error){
-  //     console.log(error)
-  //   }
-  // }
+  const updateTaskStatus = () => {
+    updateTask({
+      variables: {
+        id: tasks.id,
+        state: selectedOption,
+        comment: taskComment,
+        dateOflastCompletion: today
+        // completedBy: 
+      }
+    })
+    if (error){
+      console.log(error)
+    }
+  }
 
   const [completeToggle, setCompleteToggle] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -59,11 +63,13 @@ const TaskCards = ({tasks}) => {
   }
 
   return (
-    <Card className="task-creation p-4" id="task-creation">
+    <Card className="task-creation p-4 mb-4" id="task-creation">
       <Card.Title id="login-card-title">{tasks.taskName}</Card.Title>
-      <p>Current Status : {tasks.state}</p>
+            {tasks.state !== "incomplete" && (
+            <p>Current Status : {tasks.state}</p>
+            )}
             {tasks.due && (
-            <p>Complete By : {tasks.dueDate}</p>
+            <p>Complete By : {formatDate(tasks.dueDate)}</p>
             )}
       
             {/* {group && (

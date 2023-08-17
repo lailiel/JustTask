@@ -104,12 +104,17 @@ export const CREATE_TASK = gql`
 `;
 
 
-// export const UPDATE_TASK = gql`
-//     mutation UpdateTaskStatus($state: TaskState!, $comment: String!, $updateTaskStatusId: ID!) {
-//         updateTaskStatus(state: $state, comment: $comment, id: $updateTaskStatusId) {
-//             state
-//             comment
-//           }
-//         }
-// `;
+export const UPDATE_TASK = gql`
+mutation UpdateTaskStatus($state: TaskState!, $comment: String!, $updateTaskStatusId: ID!) {
+    updateTaskStatus(state: $state, comment: $comment, id: $updateTaskStatusId) {
+      state
+      comment
+      dateOflastCompletion
+      completedBy {
+        id
+        name
+      }
+    }
+  }
+`;
 

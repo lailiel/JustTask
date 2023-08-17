@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const dateFormat = require('../utils/dateFormat')
 
 const taskSchema = new Schema({
     taskName: {
@@ -8,7 +9,9 @@ const taskSchema = new Schema({
     },
     description: String,
     due: Boolean,
-    dueDate: Date,
+    dueDate: {
+        type: Date,
+        default: Date.now},
     assigned: Boolean,
     assignedTo: {
         type: Schema.Types.ObjectId,
@@ -25,7 +28,9 @@ const taskSchema = new Schema({
         enum: ['completed', 'in-progress', 'pending', 'incomplete']
     },
     comment: String,
-    dateOflastCompletion: Date,
+    dateOflastCompletion: {
+        type: Date,
+        default: Date.now},
     completedBy: {
         type: Schema.Types.ObjectId,
         ref: 'User'
