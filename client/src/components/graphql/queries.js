@@ -104,6 +104,35 @@ query Query {
 // `;
 
 
+
+// export const QUERY_NONCOMPLETE_TASKS = gql`
+// query IncompleteTasks {
+//     tasks (where: {state: "completed"}) {
+//       id
+//       taskName
+//       description
+//       due
+//       dueDate
+//       assigned
+//       assignedTo {
+//         id
+//       }
+//       repopulate
+//       repoulateValue
+//       dollarValue
+//       dollarAmount
+//       pointValue
+//       pointAmount
+//       state
+//       comment
+//       dateOflastCompletion
+//       completedBy {
+//         name
+//       }
+//     }
+//   }
+// `;
+
 export const QUERY_ALL_TASKS = gql`
 query Tasks {
     tasks {

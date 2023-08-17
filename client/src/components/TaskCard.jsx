@@ -40,7 +40,7 @@ const TaskCards = ({tasks}) => {
     if (error){
       console.log(error)
     } 
-    // window.location.reload()
+    window.location.reload()
   } 
   }
 
@@ -65,8 +65,8 @@ const TaskCards = ({tasks}) => {
     setTaskComment(event.target.value);
   };
 
-
-
+  
+ 
   return (
     <Card className="task-creation p-4 mb-4" id="task-creation">
       <Card.Title id="login-card-title">{tasks.taskName}</Card.Title>

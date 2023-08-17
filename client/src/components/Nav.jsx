@@ -32,8 +32,8 @@ export default function CustomNavbar() {
           <Nav id='nav-list' >
             <Link className="nav-link" to="/dashboard">DASHBOARD</Link>
             {/* <Link className="nav-link" to="/user">USER</Link> */}
-            <Link className="nav-link" to="/group">GROUP</Link>
-            <Link className="nav-link" to="/task">TASK</Link>
+            {/* <Link className="nav-link" to="/group">GROUP</Link> */}
+            <Link className="nav-link" to="/task">ADD TASK</Link>
             {AuthService.loggedIn() ? (
             <>
               <button className="nav-link" onClick={logout}>

@@ -56,6 +56,7 @@ const LoginToggle = () => {
     } catch (e) {
       console.error(e);
     }
+    window.location.assign('/dashboard')
   }
 
   // --------------------------------------------------------------------------
