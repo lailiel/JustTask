@@ -84,7 +84,7 @@ const TaskCards = ({tasks}) => {
             )}
            
             {tasks.dollarValue && (
-            <p className="m-0">Value : {tasks.dollarAmount} </p>
+            <p className="m-0">Dollar Value : ${tasks.dollarAmount} </p>
             )}
             {tasks.pointValue && (
             <p className="m-0">Points : {tasks.pointAmount} Pts</p>

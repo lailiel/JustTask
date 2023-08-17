@@ -46,11 +46,11 @@ const TaskCreation = () => {
         assigned: false,
         assignedTo: {id: "64dd6dd28615a74582ed75bc" },
         repopulate: toggleState.repeatToggle,
-        repopulateValue: repeatValue,
+        repopulateValue: parseInt(repeatValue, 10),
         dollarValue:  toggleState.dollarToggle,
-        dollarAmount: dollarValue,
+        dollarAmount: parseInt(dollarValue, 10),
         pointValue: toggleState.scoreToggle,
-        pointAmount: scoreValue,
+        pointAmount: parseInt(scoreValue, 10),
         state: "incomplete",
         comment: "",
       }
@@ -58,7 +58,7 @@ const TaskCreation = () => {
     if (error){
       console.log(error)
     }
-    window.location.assign('/group');
+   
   }
 
 
@@ -120,8 +120,7 @@ const TaskCreation = () => {
 
   const [selectedDate, setSelectedDate] = useState(null);
   const handleDateChange = (date) => {
-    formatDate(date)
-    setSelectedDate(formatDate);
+    setSelectedDate(date);
   };
 
   // ---------------------------------------------------------------
