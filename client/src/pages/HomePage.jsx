@@ -8,8 +8,11 @@ export default function HomePage() {
         <h2>HOMEPAGE</h2>
       </div>
       <div id='home-text'>
-        <p>The To Do List of the Modern Household</p>
-        <p>Your solution to chore and task management!</p>
+        <p>Discover the modern way to manage household responsibilities.</p>
+        <p>JustTask simplifies the age-old chore chart, bringing families and housemates together in a seamless, collaborative platform.</p>
+        <p>Assign tasks, track progress, and reward diligence, all in one place.</p>
+        <p>No more disputes, forgotten duties, or chaotic schedules. Just tasks, made simple and fun.</p>
+        <p>Start today and revolutionize how you manage chores!</p>
       </div>
     </Container>
   );
