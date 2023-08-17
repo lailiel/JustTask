@@ -37,6 +37,7 @@ const TaskCreation = () => {
   const [ scoreValue, setScoreValue ] = useState(null);
 
   const addTask = () => {
+    if (taskName !== "") {
     createTask( {variables: 
       {
         taskName: taskName,
@@ -59,6 +60,7 @@ const TaskCreation = () => {
       console.log(error)
     }
    window.location.assign('/dashboard')
+  } else (setErrorMessage('Enter a task name'))
   }
 
 
