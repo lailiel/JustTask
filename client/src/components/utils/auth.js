@@ -24,22 +24,20 @@ class AuthService{
         // If token hasn't passed its expiration time, return `false`
         return false;
       }
-    
 
     getToken() {
         return localStorage.getItem('id_token');
       }
    
-
     login(idToken) {
         localStorage.setItem('id_token', idToken);
-        window.location.assign('/');
+        window.location.assign('/dashboard');
       }
    
    
     logout() {
         localStorage.removeItem('id_token');
-        window.location.reload();
+        window.location.assign('/');
       }
 }
 export default new AuthService();
