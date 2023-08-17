@@ -42,6 +42,7 @@ const typeDefs = gql`
         completed
         in_progress
         pending
+        incomplete
     }
 
     type Query {
@@ -61,7 +62,7 @@ const typeDefs = gql`
         removeUserFromGroup(userId: ID!, groupId: ID!): Group!
 
         createTask(taskName: String!, description: String, priority: Int, dueDate: String, repopulate: Boolean, dollarValue: Boolean, dollarAmount: Float, pointValue: Boolean, pointAmount: Int, state: TaskState, comment: String): Task!
-        updateTaskStatus(id: ID!, state: TaskState!): Task!
+        updateTaskStatus(id: ID!, state: TaskState!, comment: String! ): Task!
     }
 `;
 

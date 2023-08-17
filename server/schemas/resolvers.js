@@ -7,31 +7,31 @@ const resolvers = {
         users: async () => {
             return await User.find({});
         },
-        user: async (_, { id }) => {
+        user: async (parent, { id }) => {
             return await User.findById(id);
         },
         groups: async () => {
             return await Group.find({});
         },
-        group: async (_, { id }) => {
+        group: async (parent, { id }) => {
             return await Group.findById(id);
         },
         tasks: async () => {
             return await Task.find({});
         },
-        task: async (_, { id }) => {
+        task: async (parent, { id }) => {
             return await Task.findById(id);
         }
     },
     Mutation: {
-        createUser: async (_, { name, email, password }) => {
+        createUser: async (parent, { name, email, password }) => {
             console.log("Attempting to create user with:", { name, email, password });
             const user = new User({ name, email, password });
             await user.save();
-            console.log("User saved with ID:", user._id);
+            //console.log("User saved with ID:", user._id);
             return user;
         },
-        deleteUser: async (_, { id }) => {
+        deleteUser: async (parent, { id }) => {
             const user = await User.findById(id);
             if (user) {
                 await user.remove();
@@ -39,12 +39,12 @@ const resolvers = {
             }
             return false;
         },
-        createGroup: async (_, { name, owners, participants, tasks }) => {
+        createGroup: async (parent, { name, owners, participants, tasks }) => {
             const group = new Group({ name, owners, participants, tasks });
             await group.save();
             return group;
         },
-        addUserToGroup: async (_, { userId, groupId }) => {
+        addUserToGroup: async (parent, { userId, groupId }) => {
             const group = await Group.findById(groupId);
             if (group && !group.participants.includes(userId)) {
                 group.participants.push(userId);
@@ -52,7 +52,7 @@ const resolvers = {
             }
             return group;
         },
-        removeUserFromGroup: async (_, { userId, groupId}) => {
+        removeUserFromGroup: async (parent, { userId, groupId}) => {
             const group = await Group.findById(groupId);
             if (group) {
                 group.participants = group.participants.filter(participant => participant.toString() !== userId);
@@ -60,12 +60,12 @@ const resolvers = {
             }
             return group;
         },
-        createTask: async (_, { taskName, description, due, dueDate, assigned, assignedTo, repopulate, repopulateValue, dollarValue, dollarAmount, pointValue, pointAmount, state, comment }) => {
+        createTask: async (parent, { taskName, description, due, dueDate, assigned, assignedTo, repopulate, repopulateValue, dollarValue, dollarAmount, pointValue, pointAmount, state, comment }) => {
             const task = new Task({ taskName, description, due, dueDate, assigned, assignedTo, repopulate, repopulateValue, dollarValue, dollarAmount, pointValue, pointAmount, state, comment });
             await task.save();
             return task;
         },
-        updateTaskStatus: async (_, { id, state }) => {
+        updateTaskStatus: async (parent, { id, state }) => {
             const task = await Task.findById(id);
             if (task) {
                 task.state = state;
@@ -75,3 +75,5 @@ const resolvers = {
         }
     }
 };
+
+module.exports = resolvers;
