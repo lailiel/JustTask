@@ -40,7 +40,7 @@ const TaskCards = ({tasks}) => {
     if (error){
       console.log(error)
     } 
-    window.location.reload()
+    // window.location.reload()
   } 
   }
 

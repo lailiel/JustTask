@@ -19,7 +19,7 @@ export default function DashboardPage() {
       {!tasks ? (
             <div>You all caught up!</div>
           ) : (
-            tasks.map(tasks => (
+            tasks.slice(0,10).map(tasks => (
             <TaskCards
               key={tasks.id}
               tasks={tasks}
