@@ -9,6 +9,8 @@ import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink, from } fro
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 
+
+
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
@@ -46,6 +48,7 @@ const client = new ApolloClient({
 
 function App() {
 
+  
   const location = useLocation()
   const currentOutlet = <Outlet/>
   const { nodeRef } =
