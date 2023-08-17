@@ -13,7 +13,6 @@ export default function HomePage() {
         <p>WITHOUT SLAPPING YOUR ROOMMATES,</p>
         <p>YOUR SPOUSE, OR YOUR CHILDREN</p>
         <p>JUST KIDDING....</p>
-        <p>SORT OF</p>
       </div>
     </Container>
   );
