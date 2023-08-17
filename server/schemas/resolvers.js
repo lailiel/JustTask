@@ -11,7 +11,7 @@ const resolvers = {
       },
     Query: {
         users: async () => {
-            return await User.find({});
+            return await User.find();
         },
         user: async (parent, { id }) => {
             return await User.findById(id);
@@ -23,7 +23,7 @@ const resolvers = {
             return await Group.findById(id);
         },
         tasks: async () => {
-            return await Task.find({});
+            return await Task.find();
         },
         task: async (parent, { id }) => {
             return await Task.findById(id);

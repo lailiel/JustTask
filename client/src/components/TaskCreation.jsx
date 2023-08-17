@@ -57,6 +57,7 @@ const TaskCreation = () => {
     if (error){
       console.log(error)
     }
+    window.location.assign('/group');
   }
 
 
@@ -241,10 +242,6 @@ const TaskCreation = () => {
               {users.map(user => (
                 <Dropdown.Item onClick={() => handleUserSelect(user)}>{user}</Dropdown.Item>
               ))}
-            {/* <Dropdown.Item onClick={() => handleUserSelect("Sarah")}>Sarah</Dropdown.Item>
-            <Dropdown.Item onClick={() => handleUserSelect("Richard")}>Richard</Dropdown.Item>
-            <Dropdown.Item onClick={() => handleUserSelect("Your Mom")}>Your Mom</Dropdown.Item>
-            <Dropdown.Item onClick={() => handleUserSelect("Dex")}>Dex</Dropdown.Item> */}
           </DropdownButton>
         
         )}

@@ -31,7 +31,7 @@ export default function CustomNavbar() {
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end" onClick={closeNavbar}>
           <Nav id='nav-list' >
             <Link className="nav-link" to="/dashboard">DASHBOARD</Link>
-            <Link className="nav-link" to="/user">USER</Link>
+            {/* <Link className="nav-link" to="/user">USER</Link> */}
             <Link className="nav-link" to="/group">GROUP</Link>
             <Link className="nav-link" to="/task">TASK</Link>
             {AuthService.loggedIn() ? (

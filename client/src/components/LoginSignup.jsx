@@ -34,6 +34,7 @@ const LoginToggle = () => {
     if (error){
       console.log(error)
     }
+    window.location.assign('/dashboard');
   }
   // --------------------------------------------------------
 
@@ -55,9 +56,6 @@ const LoginToggle = () => {
     } catch (e) {
       console.error(e);
     }
-
-    setEmail("")
-    setPassword("")
   }
 
   // --------------------------------------------------------------------------

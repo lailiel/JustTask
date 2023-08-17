@@ -2,13 +2,17 @@ import { gql } from '@apollo/client';
 
 
 export const QUERY_ALL_USERS = gql`
-query allUsers {
+query Query {
     users {
-        id
-        name
-        email
-        assignedTasks
-        completedTasks
+      name
+      id
+      email
+      completedTasks {
+        taskName
+      }
+      assignedTasks {
+        taskName
+      }
     }
   }
 `;
@@ -101,22 +105,29 @@ query allUsers {
 
 
 export const QUERY_ALL_TASKS = gql`
-  query groupTasks {
-    task{
+query Tasks {
+    tasks {
+      id
+      taskName
+      description
+      due
+      dueDate
+      assigned
+      assignedTo {
         id
-        taskName
-        description
-        priority
-        dueDate
-        repopulate
-        dollarValue
-        dollarAmount
-        pointValue
-        pointAmount
-        state
-        comment
-        dateOflastCompletion
-        completedBy
+      }
+      repopulate
+      repoulateValue
+      dollarValue
+      dollarAmount
+      pointValue
+      pointAmount
+      state
+      comment
+      dateOflastCompletion
+      completedBy {
+        name
+      }
     }
   }
 `;
