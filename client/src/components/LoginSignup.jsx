@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { Card, Form, InputGroup, Button } from "react-bootstrap";
 import { validateEmail } from "../components/utils/helpers";
 import { useMutation } from '@apollo/client';
-import { CREATE_USER } from '../components/graphql/mutations'
+import { CREATE_USER , LOGIN_USER} from '../components/graphql/mutations'
+import  AuthService  from '../components/utils/auth';
+
+
 
 const LoginToggle = () => {
   const [activeCard, setActiveCard] = useState("login");
@@ -18,7 +21,7 @@ const LoginToggle = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [createUser, { error }] = useMutation(CREATE_USER)
+  const [createUser, { error1 }] = useMutation(CREATE_USER)
 
   const addUser = () => {
     console.log(name, email, password)
@@ -32,8 +35,26 @@ const LoginToggle = () => {
       console.log(error)
     }
   }
+
+  const [login, { error2, data }] = useMutation(LOGIN_USER);
+
   
-  
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    console.log(email, password);
+    try {
+      const { data } = await login({
+        variables: { 
+          email: email,
+          password: password
+        },
+      });
+
+      AuthService.login(data.login.token);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   // --------------------------------------------------------------------------
 
@@ -86,6 +107,7 @@ const LoginToggle = () => {
                 placeholder="example@email.com"
                 aria-label="Email"
                 name="email"
+                type="email"
                 id="form-control"
                 aria-describedby="basic-addon2"
                 onBlur={handleBlur}
@@ -99,6 +121,7 @@ const LoginToggle = () => {
                 placeholder="Password"
                 aria-label="Password"
                 name="password"
+                type="password"
                 id="form-control"
                 aria-describedby="basic-addon2"
                 onBlur={handleBlur}
@@ -107,7 +130,7 @@ const LoginToggle = () => {
             </InputGroup>
           </div>
           <div>
-            <Button onClick={() => setErrorMessage("coming soon")}>SUBMIT</Button>
+            <Button onClick={ handleLogin }>SUBMIT</Button>
             <Button className="mx-3" onClick={() => handleCardChange("signup")}>
               SIGNUP
             </Button>
@@ -153,6 +176,7 @@ const LoginToggle = () => {
                 placeholder="Password"
                 aria-label="Password"
                 name="password"
+                type="password"
                 id="form-control"
                 aria-describedby="basic-addon2"
                 onBlur={handleBlur}

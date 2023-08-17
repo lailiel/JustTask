@@ -12,6 +12,11 @@ scalar Date
         completedTasks: [Task]
     }
 
+    type Auth {
+        token: ID!
+        user: User
+      }
+
     type Group {
         id: ID!
         name: String!
@@ -62,6 +67,7 @@ scalar Date
     type Mutation {
         createUser(name: String!, email: String!, password: String!): User!
         deleteUser(id: ID!): Boolean!
+        login(email: String!, password: String!): Auth
 
         createGroup(name: String!, owners: [ID!]!, participants: [ID!]!, tasks: [ID!]): Group!
         addUserToGroup(userId: ID!, groupId: ID!): Group!

@@ -1,6 +1,6 @@
-const User = require('../models/User');
-const Group = require('../models/Group');
-const Task = require('../models/Task');
+const { User, Group, Task } = require('../models');
+
+const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
 
@@ -45,6 +45,23 @@ const resolvers = {
             }
             return false;
         },
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+      
+            if (!user) {
+              throw AuthenticationError;
+            }
+      
+            const correctPw = await user.isCorrectPassword(password);
+      
+            if (!correctPw) {
+              throw AuthenticationError;
+            }
+      
+            const token = signToken(user);
+      
+            return { token, user };
+          },
         createGroup: async (parent, { name, owners, participants, tasks }) => {
             const group = new Group({ name, owners, participants, tasks });
             await group.save();
