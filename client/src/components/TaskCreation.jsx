@@ -3,8 +3,9 @@ import DatePicker from 'react-datepicker'
 import { useState } from "react";
 import 'react-datepicker/dist/react-datepicker.css';
 import { useMutation } from '@apollo/client';
-import { CREATE_TASK} from '../components/graphql/mutations'
-
+import { CREATE_TASK} from '../components/graphql/mutations';
+import { useQuery } from '@apollo/client';
+import { QUERY_GROUP_MEMBERS } from '../components/graphql/queries'
 
 
 
@@ -22,6 +23,11 @@ import { CREATE_TASK} from '../components/graphql/mutations'
 const TaskCreation = () => {
 
   const [errorMessage, setErrorMessage ]= useState('');
+
+  const { loading, data } = useQuery(QUERY_GROUP_MEMBERS);
+  const owners = data?.owners || [] ;
+  const participants = data?.participants || [];
+  const members = [...owners, ... participants]
 
   // ---------------------------------------------------------------
   const [createTask, {error}] = useMutation(CREATE_TASK)

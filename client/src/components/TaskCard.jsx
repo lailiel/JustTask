@@ -10,8 +10,6 @@ import { UPDATE_TASK} from '../components/graphql/mutations'
 // --------------------
 // TODO
 
-// --add error message for submit on click for if complete = 'select'
-// --conditional rendering of group name
 // --auth stuff
 
 // --------------------
@@ -55,6 +53,8 @@ const TaskCards = ({tasks}) => {
   const handleSubmit = () => {
     if (selectedOption !== "Select") {
       updateTaskStatus
+    } else {
+      setErrorMessage("Select a complete option")
     }
   }
 
