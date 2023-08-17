@@ -34,7 +34,7 @@ const LoginToggle = () => {
     if (error){
       console.log(error)
     }
-    window.location.assign('/dashboard');
+    // window.location.assign('/dashboard');
   }
   // --------------------------------------------------------
 
@@ -54,9 +54,10 @@ const LoginToggle = () => {
 
       AuthService.login(data.login.token);
     } catch (e) {
+      setErrorMessage('Email or password is incorrect. Try again.')
       console.error(e);
     }
-    window.location.assign('/dashboard')
+
   }
 
   // --------------------------------------------------------------------------
