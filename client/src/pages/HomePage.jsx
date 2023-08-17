@@ -8,12 +8,8 @@ export default function HomePage() {
         <h2>HOMEPAGE</h2>
       </div>
       <div id='home-text'>
-        <p>THIS IS A PRETTY COOL APP</p>
-        <p>IT HELPS YOU GET STUFF DONE!</p>
-        <p>WITHOUT SLAPPING YOUR ROOMMATES,</p>
-        <p>YOUR SPOUSE, OR YOUR CHILDREN</p>
-        <p>JUST KIDDING....</p>
-        <p>SORT OF</p>
+        <p>The To Do List of the Modern Household</p>
+        <p>Your solution to chore and task management!</p>
       </div>
     </Container>
   );
