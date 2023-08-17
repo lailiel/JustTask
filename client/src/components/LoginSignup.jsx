@@ -22,23 +22,52 @@ const LoginToggle = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const [createUser, { error }] = useMutation(CREATE_USER)
+  const [login, { data }] = useMutation(LOGIN_USER);
 
   const addUser = () => {
-    console.log(name, email, password)
-    createUser( {variables:
-      {
+    console.log(name, email, password);
+  
+    createUser({
+      variables: {
         name: name,
         email: email,
-        password: password
-    }})
-    if (error){
-      console.log(error)
-    }
-    // window.location.assign('/dashboard');
+        password: password,
+      },
+    })
+      .then(({ data, error }) => {
+        if (error) {
+          console.log(error);
+          return;
+        }
+  
+        if (data.createUser) {
+          // Perform login after successful user creation
+          return login({
+            variables: {
+              email: email,
+              password: password,
+            },
+          });
+        } else {
+          console.log("User creation failed.");
+        }
+      })
+      .then(({ data }) => {
+        if (data && data.login.token) {
+          // Login successful, store token and redirect
+          AuthService.login(data.login.token);
+          window.location.assign('/dashboard');
+        } else {
+          console.log("Login failed.");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
   // --------------------------------------------------------
 
-  const [login, { data }] = useMutation(LOGIN_USER);
+
 
   
   const handleLogin = async (event) => {
