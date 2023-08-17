@@ -92,7 +92,7 @@ const TaskCards = ({tasks}) => {
             {tasks.comment && (
             <p className="m-0">Comment : {tasks.comment} </p>
             )}
-            {tasks.dateOflastCompletion && (
+            {tasks.state === "completed" && (
             <p className="m-0">Last Done : {formatDate(tasks.dateOflastCompletion)}</p>
             )}
       <div>
@@ -105,7 +105,7 @@ const TaskCards = ({tasks}) => {
               id="input-group-dropdown-1"
             >
               <Dropdown.Item onClick={() => [handleOptionSelect("completed", "Complete"), ]}>Complete</Dropdown.Item>
-              <Dropdown.Item onClick={() => [handleOptionSelect("in_progress", "In Progress"), ]}>In Progress</Dropdown.Item>
+              <Dropdown.Item onClick={() => [handleOptionSelect("inprogress", "In Progress"), ]}>In Progress</Dropdown.Item>
               <Dropdown.Item onClick={() => [handleOptionSelect("pending", "Pending"), ]}>Pending</Dropdown.Item>
             </DropdownButton>
           )}

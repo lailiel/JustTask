@@ -9,7 +9,7 @@ db.once('open', async ()=> {
 try{
     await clearDB('User', 'users');
     await clearDB('Group', 'groups');
-    await clearDB('Group', 'groups');
+    await clearDB('Task', 'tasks');
 
     await User.create(userSeeds);
     //--------------------------

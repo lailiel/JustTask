@@ -25,7 +25,7 @@ const taskSchema = new Schema({
     pointAmount: Number,
     state: {
         type: String,
-        enum: ['completed', 'in_progress', 'pending', 'incomplete']
+        enum: ['completed', 'inprogress', 'pending', 'incomplete']
     },
     comment: String,
     dateOflastCompletion: {

@@ -51,7 +51,7 @@ scalar Date
 
     enum TaskState {
         completed
-        in_progress
+        inprogress
         pending
         incomplete
     }
