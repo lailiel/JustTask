@@ -6,7 +6,6 @@ import { CREATE_USER , LOGIN_USER} from '../components/graphql/mutations'
 import  AuthService  from '../components/utils/auth';
 
 
-
 const LoginToggle = () => {
   const [activeCard, setActiveCard] = useState("login");
 
@@ -39,9 +38,7 @@ const LoginToggle = () => {
           console.log(error);
           return;
         }
-  
         if (data.createUser) {
-          // Perform login after successful user creation
           return login({
             variables: {
               email: email,
@@ -54,7 +51,7 @@ const LoginToggle = () => {
       })
       .then(({ data }) => {
         if (data && data.login.token) {
-          // Login successful, store token and redirect
+
           AuthService.login(data.login.token);
           window.location.assign('/dashboard');
         } else {
@@ -65,11 +62,9 @@ const LoginToggle = () => {
         console.error(error);
       });
   }
+
   // --------------------------------------------------------
 
-
-
-  
   const handleLogin = async (event) => {
     event.preventDefault();
     console.log(email, password);
