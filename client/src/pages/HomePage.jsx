@@ -9,9 +9,9 @@ export default function HomePage() {
       </div>
       <div id='home-text'>
         <p>Discover the modern way to manage household responsibilities.</p>
-        <p>JustTask simplifies the age-old chore chart, bringing families and housemates together in a seamless, collaborative platform.</p>
+        <p>JustTask simplifies the age-old chore chart, bringing families or housemates together in a seamless, collaborative platform.</p>
         <p>Assign tasks, track progress, and reward diligence, all in one place.</p>
-        <p>No more disputes, forgotten duties, or chaotic schedules. Just tasks, made simple and fun.</p>
+        <p>No more disputes, forgotten duties, or chaotic schedules. JustTask(s), made simple and fun.</p>
         <p>Start today and revolutionize how you manage chores!</p>
       </div>
     </Container>
