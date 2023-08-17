@@ -5,9 +5,23 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import Nav from './components/nav'
 import routes from './main'
 import Container from 'react-bootstrap/Container'
-import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink, from } from '@apollo/client'
-
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink, from } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
+
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
 
 const errorLink = onError(({graphqlErrors, networkError}) => {
   if (graphqlErrors) {
@@ -16,15 +30,18 @@ const errorLink = onError(({graphqlErrors, networkError}) => {
   }
 });
 
+
 const link = from([
   errorLink, 
-  new HttpLink({uri: "http://localhost:3001/graphql"}),
-])
+  authLink.concat(httpLink),
+]);
+
+
 
 const client = new ApolloClient({
+  link: link,
   cache: new InMemoryCache(),
-  link: link 
-})
+});
 
 
 function App() {

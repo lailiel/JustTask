@@ -21,7 +21,7 @@ const LoginToggle = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [createUser, { error1 }] = useMutation(CREATE_USER)
+  const [createUser, { error }] = useMutation(CREATE_USER)
 
   const addUser = () => {
     console.log(name, email, password)
@@ -35,8 +35,9 @@ const LoginToggle = () => {
       console.log(error)
     }
   }
+  // --------------------------------------------------------
 
-  const [login, { error2, data }] = useMutation(LOGIN_USER);
+  const [login, { data }] = useMutation(LOGIN_USER);
 
   
   const handleLogin = async (event) => {
@@ -51,9 +52,12 @@ const LoginToggle = () => {
       });
 
       AuthService.login(data.login.token);
-    } catch (error) {
-      console.error(error);
+    } catch (e) {
+      console.error(e);
     }
+
+    setEmail("")
+    setPassword("")
   }
 
   // --------------------------------------------------------------------------
@@ -108,7 +112,7 @@ const LoginToggle = () => {
                 aria-label="Email"
                 name="email"
                 type="email"
-                id="form-control"
+                className="form-control"
                 aria-describedby="basic-addon2"
                 onBlur={handleBlur}
                 onChange={handleInputChange}
@@ -122,7 +126,7 @@ const LoginToggle = () => {
                 aria-label="Password"
                 name="password"
                 type="password"
-                id="form-control"
+                className="form-control"
                 aria-describedby="basic-addon2"
                 onBlur={handleBlur}
                 onChange={handleInputChange}
@@ -151,7 +155,7 @@ const LoginToggle = () => {
                 placeholder="Name"
                 aria-label="Name"
                 name="name"
-                id="form-control"
+                className="form-control"
                 aria-describedby="basic-addon2"
                 onBlur={handleBlur}
                 onChange={handleInputChange}
@@ -163,7 +167,8 @@ const LoginToggle = () => {
                 placeholder="example@email.com"
                 aria-label="Email"
                 name="email"
-                id="form-control"
+                type="email"
+                className="form-control"
                 aria-describedby="basic-addon2"
                 onBlur={handleBlur}
                 onChange={handleInputChange}

@@ -12,12 +12,12 @@ mutation CreateUser($name: String!, $email: String!, $password: String!) {
 `;
 
 export const LOGIN_USER = gql`
-  mutation Login($email: String!, $password: String!) {
+mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-      token
-      user {
-        id
-        name
+        token
+        user {
+            id
+            name
       }
     }
   }

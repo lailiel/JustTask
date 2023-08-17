@@ -71,7 +71,7 @@ body {
   color: var(--mid-dark);
 }
 
-#form-control{
+.form-control{
   background-color: var(--x-light);
 }
 

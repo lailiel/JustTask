@@ -162,7 +162,7 @@ const TaskCreation = () => {
           placeholder="Task"
           aria-label="Task"
           name="task"
-          id="form-control"
+          className="form-control"
           aria-describedby="basic-addon2"
           onChange={handleInputChange}
         />
@@ -175,7 +175,7 @@ const TaskCreation = () => {
           as="textarea"
           aria-label="Task Description"
           name="task-description"
-          id="form-control"
+          className="form-control"
           aria-describedby="basic-addon2"
           onChange={handleInputChange}
         />
