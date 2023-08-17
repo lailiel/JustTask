@@ -2,6 +2,8 @@ const express = require('express');
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+scalar Date
+
     type User {
         id: ID!
         name: String!
@@ -18,12 +20,16 @@ const typeDefs = gql`
         tasks: [Task!]!
     }
 
+    input UserInput {
+        id: ID!
+      }
+
     type Task {
         id: ID!
         taskName: String!
         description: String
         due: Boolean
-        dueDate: String
+        dueDate: Date
         assigned: Boolean
         assignedTo: User
         repopulate: Boolean
@@ -34,7 +40,7 @@ const typeDefs = gql`
         pointAmount: Int
         state: TaskState
         comment: String
-        dateOflastCompletion: String
+        dateOflastCompletion: Date
         completedBy: User
     }
 
@@ -61,7 +67,7 @@ const typeDefs = gql`
         addUserToGroup(userId: ID!, groupId: ID!): Group!
         removeUserFromGroup(userId: ID!, groupId: ID!): Group!
 
-        createTask(taskName: String!, description: String, priority: Int, dueDate: String, repopulate: Boolean, dollarValue: Boolean, dollarAmount: Float, pointValue: Boolean, pointAmount: Int, state: TaskState, comment: String): Task!
+        createTask(taskName: String!, description: String, due: Boolean, dueDate: Date, assigned: Boolean, assignedTo: UserInput, repopulate: Boolean, repopulateValue: Int, dollarValue: Boolean, dollarAmount: Int, pointValue: Boolean, pointAmount: Int, state: TaskState, comment: String): Task
         updateTaskStatus(id: ID!, state: TaskState!, comment: String! ): Task!
     }
 `;

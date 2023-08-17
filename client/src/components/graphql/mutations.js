@@ -2,19 +2,13 @@ import { gql } from '@apollo/client'
 
 
 export const CREATE_USER = gql`
-    mutation createUser(
-        $name: String!, 
-        $email: String!, 
-        $password: String!
-            ) {
-            createUser(
-                name: $name
-                email: $email
-                password: $password
-            ) {
-                name
-            }
-        }
+mutation CreateUser($name: String!, $email: String!, $password: String!) {
+    createUser(name: $name, email: $email, password: $password) {
+      email
+      id
+      name
+    }
+  }
 `;
 
 
@@ -57,15 +51,15 @@ export const CREATE_USER = gql`
 
 
 export const CREATE_TASK = gql`
-    mutation createTask (
+    mutation Mutation (
         $taskName: String!, 
         $description: String, 
         $due: Boolean, 
-        $dueDate: String, 
+        $dueDate: Date, 
         $assigned: Boolean,
-        $assignedTo: User
+        $assignedTo: UserInput,
         $repopulate: Boolean, 
-        $repopulateValue: Int
+        $repopulateValue: Int,
         $dollarValue: Boolean, 
         $dollarAmount: Int, 
         $pointValue: Boolean, 
@@ -89,21 +83,21 @@ export const CREATE_TASK = gql`
                 state: $state 
                 comment: $comment
             ) {
-                id
                 taskName
+                description
             }
         }
         
 `;
 
 
-export const UPDATE_TASK = gql`
-    mutation updateTaskStatus($id: ID!, $state: TaskState! $comment: Comment) {
-        updateTaskStatus(
-            id: #id
-            state: $state
-            comment: $comment
-        )
-    }
-`;
+// export const UPDATE_TASK = gql`
+//     mutation updateTaskStatus($id: ID!, $state: TaskState! $comment: Comment) {
+//         updateTaskStatus(
+//             id: #id
+//             state: $state
+//             comment: $comment
+//         )
+//     }
+// `;
 

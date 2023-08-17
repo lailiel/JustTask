@@ -5,9 +5,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useMutation } from '@apollo/client';
 import { CREATE_TASK} from '../components/graphql/mutations';
 import { useQuery } from '@apollo/client';
-import { QUERY_GROUP_MEMBERS } from '../components/graphql/queries'
-
-
+// import { QUERY_GROUP_MEMBERS } from '../components/graphql/queries'
+import { QUERY_ALL_USERS } from '../components/graphql/queries'
 
 
 // --------------------
@@ -24,26 +23,27 @@ const TaskCreation = () => {
 
   const [errorMessage, setErrorMessage ]= useState('');
 
-  const { loading, data } = useQuery(QUERY_GROUP_MEMBERS);
-  const owners = data?.owners || [] ;
-  const participants = data?.participants || [];
-  const members = [...owners, ... participants]
+  const { data } = useQuery(QUERY_ALL_USERS);
+  const users = data?.name || [] ;
+  
 
   // ---------------------------------------------------------------
   const [createTask, {error}] = useMutation(CREATE_TASK)
 
   const [ taskName, setTaskName ] = useState("");
   const [ description, setDescription ] = useState("");
-  const [ dollarValue, setDollarValue ] = useState("");
-  const [ scoreValue, setScoreValue ] = useState("");
+  const [ dollarValue, setDollarValue ] = useState(null);
+  const [ scoreValue, setScoreValue ] = useState(null);
 
   const addTask = () => {
-    createTask({
-      variables: {
+    createTask( {variables: 
+      {
         taskName: taskName,
         description: description,
         due: toggleState.assignToggle,
         dueDate: selectedDate,
+        assigned: false,
+        assignedTo: {id: "64dd6dd28615a74582ed75bc" },
         repopulate: toggleState.repeatToggle,
         repopulateValue: repeatValue,
         dollarValue:  toggleState.dollarToggle,
@@ -51,7 +51,7 @@ const TaskCreation = () => {
         pointValue: toggleState.scoreToggle,
         pointAmount: scoreValue,
         state: "incomplete",
-        comment: [],
+        comment: "",
       }
     })
     if (error){
@@ -83,6 +83,7 @@ const TaskCreation = () => {
   const toggleAssign = () => {
     setToggleState({ ...toggleState, assignToggle: !toggleState.assignToggle});
     setSelectedUser("Assign To")
+    console.log(users)
   };
 
   const toggleDollar = () => {
@@ -237,10 +238,13 @@ const TaskCreation = () => {
             variant="outline-secondary"
             title={selectedUser}
             id="input-group-dropdown-1">
-            <Dropdown.Item onClick={() => handleUserSelect("Sarah")}>Sarah</Dropdown.Item>
+              {users.map(user => (
+                <Dropdown.Item onClick={() => handleUserSelect(user)}>{user}</Dropdown.Item>
+              ))}
+            {/* <Dropdown.Item onClick={() => handleUserSelect("Sarah")}>Sarah</Dropdown.Item>
             <Dropdown.Item onClick={() => handleUserSelect("Richard")}>Richard</Dropdown.Item>
             <Dropdown.Item onClick={() => handleUserSelect("Your Mom")}>Your Mom</Dropdown.Item>
-            <Dropdown.Item onClick={() => handleUserSelect("Dex")}>Dex</Dropdown.Item>
+            <Dropdown.Item onClick={() => handleUserSelect("Dex")}>Dex</Dropdown.Item> */}
           </DropdownButton>
         
         )}
@@ -290,7 +294,7 @@ const TaskCreation = () => {
       </Row>
     </div>
 
-    <Button onClick={() => addTask}>SUBMIT</Button>
+    <Button onClick={addTask}>SUBMIT</Button>
     
     <div>
       {errorMessage}

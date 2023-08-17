@@ -3,6 +3,12 @@ const Group = require('../models/Group');
 const Task = require('../models/Task');
 
 const resolvers = {
+
+    Date: {
+        serialize: (value) => value.toISOString(),
+        parseValue: (value) => new Date(value),
+        parseLiteral: (ast) => new Date(ast.value),
+      },
     Query: {
         users: async () => {
             return await User.find({});
@@ -61,7 +67,8 @@ const resolvers = {
             return group;
         },
         createTask: async (parent, { taskName, description, due, dueDate, assigned, assignedTo, repopulate, repopulateValue, dollarValue, dollarAmount, pointValue, pointAmount, state, comment }) => {
-            const task = new Task({ taskName, description, due, dueDate, assigned, assignedTo, repopulate, repopulateValue, dollarValue, dollarAmount, pointValue, pointAmount, state, comment });
+            const assignedUser = User.findById(assignedTo.id)
+            const task = new Task({ taskName, description, due, dueDate, assigned, assignedUser, repopulate, repopulateValue, dollarValue, dollarAmount, pointValue, pointAmount, state, comment });
             await task.save();
             return task;
         },

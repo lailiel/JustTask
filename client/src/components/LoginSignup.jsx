@@ -18,21 +18,22 @@ const LoginToggle = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [createUser, {error}] = useMutation(CREATE_USER)
+  const [createUser, { error }] = useMutation(CREATE_USER)
 
   const addUser = () => {
-    createUser({
-      variables: {
+    console.log(name, email, password)
+    createUser( {variables:
+      {
         name: name,
         email: email,
         password: password
-      }
-    })
+    }})
     if (error){
       console.log(error)
     }
   }
-
+  
+  
 
   // --------------------------------------------------------------------------
 
@@ -160,7 +161,7 @@ const LoginToggle = () => {
             </InputGroup>
           </div>
           <div>
-            <Button onClick={() => addUser }>SUBMIT</Button>
+            <Button onClick={ addUser }>SUBMIT</Button>
             <Button className="mx-3" onClick={() => handleCardChange("login")}>
               LOGIN
             </Button>

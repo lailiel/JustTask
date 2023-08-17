@@ -1,7 +1,7 @@
 import { Card, Button, Form, Dropdown, DropdownButton, InputGroup } from "react-bootstrap/";
 import { useState } from "react";
-import { useMutation } from '@apollo/client';
-import { UPDATE_TASK} from '../components/graphql/mutations'
+// import { useMutation } from '@apollo/client';
+// import { UPDATE_TASK} from '../components/graphql/mutations'
 
 
 
@@ -16,21 +16,21 @@ import { UPDATE_TASK} from '../components/graphql/mutations'
 
 const TaskCards = ({tasks}) => {
 
-  const [updateTask, {error}] = useMutation(UPDATE_TASK)
-  const [taskComment, setTaskComment] = useState("")
+  // const [updateTask, {error}] = useMutation(UPDATE_TASK)
+  // const [taskComment, setTaskComment] = useState("")
 
-  const updateTaskStatus = () => {
-    updateTask({
-      variables: {
-        id: tasks.id,
-        state: selectedOption,
-        comment: taskComment
-      }
-    })
-    if (error){
-      console.log(error)
-    }
-  }
+  // const updateTaskStatus = () => {
+  //   updateTask({
+  //     variables: {
+  //       id: tasks.id,
+  //       state: selectedOption,
+  //       comment: taskComment
+  //     }
+  //   })
+  //   if (error){
+  //     console.log(error)
+  //   }
+  // }
 
   const [completeToggle, setCompleteToggle] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
