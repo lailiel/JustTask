@@ -27,7 +27,7 @@
     },
     {
         "taskName": "Party",
-        "description": "sweep floor, get corners",
+        "description": "pickup keg, mow lawn",
         "due": true,
         "dueDate": "2023-08-19",
         "state": "incomplete"

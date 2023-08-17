@@ -6,7 +6,6 @@ import { CREATE_USER , LOGIN_USER} from '../components/graphql/mutations'
 import  AuthService  from '../components/utils/auth';
 
 
-
 const LoginToggle = () => {
   const [activeCard, setActiveCard] = useState("login");
 
@@ -22,25 +21,50 @@ const LoginToggle = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const [createUser, { error }] = useMutation(CREATE_USER)
-
-  const addUser = () => {
-    console.log(name, email, password)
-    createUser( {variables:
-      {
-        name: name,
-        email: email,
-        password: password
-    }})
-    if (error){
-      console.log(error)
-    }
-    // window.location.assign('/dashboard');
-  }
-  // --------------------------------------------------------
-
   const [login, { data }] = useMutation(LOGIN_USER);
 
+  const addUser = () => {
+    console.log(name, email, password);
   
+    createUser({
+      variables: {
+        name: name,
+        email: email,
+        password: password,
+      },
+    })
+      .then(({ data, error }) => {
+        if (error) {
+          console.log(error);
+          return;
+        }
+        if (data.createUser) {
+          return login({
+            variables: {
+              email: email,
+              password: password,
+            },
+          });
+        } else {
+          console.log("User creation failed.");
+        }
+      })
+      .then(({ data }) => {
+        if (data && data.login.token) {
+
+          AuthService.login(data.login.token);
+          window.location.assign('/dashboard');
+        } else {
+          console.log("Login failed.");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  // --------------------------------------------------------
+
   const handleLogin = async (event) => {
     event.preventDefault();
     console.log(email, password);
