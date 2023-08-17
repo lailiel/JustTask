@@ -17,13 +17,15 @@
   [Questions](#questions)
 
   ## Description
-  A todo list site where a user can log in and make a group with multiple other users. Tasks can be assigned to users of the group with priority, due date, task name, and task description. The site will repopulate with the most recent tasks.
+  A todo list site where a user can log in and make a group with multiple other users. Tasks can be assigned to users of the group with due date, task name, money reward amount, and task description. The site will repopulate with the most recent tasks.
 
   ## Installation 
   N/A
 
   ## Usage
   Go to the Heroku link:
+  Sign up for an account with a name, email, and password
+  Make a group by clicking the group tab at the top right of the site  
 
   ## Contributing
   Francis Jung, John Quaranta, Kyle McClendon, Abilgail Livick
