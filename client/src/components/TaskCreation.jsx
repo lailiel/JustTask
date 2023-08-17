@@ -58,7 +58,7 @@ const TaskCreation = () => {
     if (error){
       console.log(error)
     }
-   
+   window.location.assign('/dashboard')
   }
 
 
