@@ -1,4 +1,4 @@
-import { Card, Button, Form, Dropdown, DropdownButton, InputGroup } from "react-bootstrap/";
+import { Card, Button, Form, Dropdown, DropdownButton, InputGroup, Container } from "react-bootstrap/";
 import { useState } from "react";
 import { useMutation } from '@apollo/client';
 import { UPDATE_TASK} from '../components/graphql/mutations'
@@ -71,31 +71,33 @@ const TaskCards = ({tasks}) => {
     <Card className="task-creation p-4 mb-4" id="task-creation">
       <Card.Title id="login-card-title">{tasks.taskName}</Card.Title>
             {tasks.state !== "incomplete" && (
-            <p>Current Status : {tasks.state}</p>
+            <p className="m-0">Current Status : {tasks.state}</p>
             )}
             {tasks.due && (
-            <p>Complete By : {formatDate(tasks.dueDate)}</p>
+            <p className="m-0">Complete By : {formatDate(tasks.dueDate)}</p>
             )}
             {tasks.assigned && (
-            <p>Assigned To : {tasks.assignedTo} </p>
+            <p className="m-0">Assigned To : {tasks.assignedTo} </p>
             )}
+            {tasks.description && (
+          <Card.Text className="p-2 my-2 task-description">{tasks.description}</Card.Text>
+            )}
+           
             {tasks.dollarValue && (
-            <p>Value : {tasks.dollarAmount} </p>
+            <p className="m-0">Value : {tasks.dollarAmount} </p>
             )}
             {tasks.pointValue && (
-            <p>Points : {tasks.pointAmount} Pts</p>
+            <p className="m-0">Points : {tasks.pointAmount} Pts</p>
             )}
             {tasks.comment && (
-            <p>Comment : {tasks.comment} </p>
+            <p className="m-0">Comment : {tasks.comment} </p>
             )}
             {tasks.dateOflastCompletion && (
-            <p>Last Done : {formatDate(tasks.dateOflastCompletion)}</p>
+            <p className="m-0">Last Done : {formatDate(tasks.dateOflastCompletion)}</p>
             )}
-      <Card.Text>{tasks.description}</Card.Text>
-
       <div>
-        <InputGroup className="">
-          <Button onClick={() => toggleComplete(true)}>Complete</Button>
+        <InputGroup className="mt-3">
+          <Button  onClick={() => toggleComplete(true)}>Complete</Button>
           {completeToggle && (
             <DropdownButton
               variant="outline-secondary"

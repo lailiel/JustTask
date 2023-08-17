@@ -1,6 +1,7 @@
 :root {
   --x-light:#EFF7FC;
   --light: #BAFFDF;
+  --light-blue: #e2f2fc ;
   --mid-light: #70C1F3;
   --mid: #319441;
   --mid-dark: #002C56;
@@ -77,6 +78,16 @@ body {
 
 #form-label{
   color: var(--mid-dark);
+}
+
+/* ------------------------------------------- */
+
+.task-description{
+  background-color: var(--light-blue);
+  border: solid;
+  border-color: var(--mid);
+  border-width: 1.5px;
+  border-radius: 0.375rem;
 }
 
 /* ------------------------------------------- */
