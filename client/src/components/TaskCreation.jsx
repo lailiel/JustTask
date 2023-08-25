@@ -43,8 +43,8 @@ const TaskCreation = () => {
         description: description,
         due: toggleState.dateToggle,
         dueDate: selectedDate,
-        assigned: false,
-        assignedTo: {id: "64ddefd661592d65db64d7a3"},
+        assigned: toggleState.assignToggle,
+        assignedTo: selectedUserID,
         repopulate: toggleState.repeatToggle,
         repopulateValue: parseInt(repeatValue, 10),
         dollarValue:  toggleState.dollarToggle,
@@ -238,7 +238,7 @@ const TaskCreation = () => {
             
       <Row xs={1} sm={1} md={2} lg={2}>
       {/* <Row  xs={1} sm={2} md={3} lg={3}> */}
-        {/* <Col>
+        <Col>
       <Form.Label id="form-label">Assign:</Form.Label>
       <InputGroup className="mb-3" id="date-picker-group">
         <Button onClick={() => toggleAssign(true)}>+</Button>
@@ -254,7 +254,7 @@ const TaskCreation = () => {
         
         )}
       </InputGroup>
-      </Col> */}
+      </Col>
 
       <Col>
       <Form.Label id="form-label">Dollar Value:</Form.Label>

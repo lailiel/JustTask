@@ -73,8 +73,8 @@ scalar Date
         addUserToGroup(userId: ID!, groupId: ID!): Group!
         removeUserFromGroup(userId: ID!, groupId: ID!): Group!
 
-        createTask(taskName: String!, description: String, due: Boolean, dueDate: Date, assigned: Boolean, assignedTo: UserInput, repopulate: Boolean, repopulateValue: Int, dollarValue: Boolean, dollarAmount: Int, pointValue: Boolean, pointAmount: Int, state: TaskState, comment: String): Task
-        updateTaskStatus(id: ID!, state: TaskState!, comment: String!, dateOflastCompletion: Date, completedBy: UserInput): Task!
+        createTask(taskName: String!, description: String, due: Boolean, dueDate: Date, assigned: Boolean, assignedTo: ID!, repopulate: Boolean, repopulateValue: Int, dollarValue: Boolean, dollarAmount: Int, pointValue: Boolean, pointAmount: Int, state: TaskState, comment: String): Task
+        updateTaskStatus(id: ID!, state: TaskState!, comment: String!, dateOflastCompletion: Date, completedBy: ID!): Task!
     }
 `;
 

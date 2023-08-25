@@ -63,6 +63,8 @@ mutation Login($email: String!, $password: String!) {
 // `;
 
 
+
+
 export const CREATE_TASK = gql`
     mutation Mutation (
         $taskName: String!, 
@@ -70,7 +72,7 @@ export const CREATE_TASK = gql`
         $due: Boolean, 
         $dueDate: Date, 
         $assigned: Boolean,
-        $assignedTo: UserInput,
+        $assignedTo: ID!,
         $repopulate: Boolean, 
         $repopulateValue: Int,
         $dollarValue: Boolean, 
@@ -98,6 +100,10 @@ export const CREATE_TASK = gql`
             ) {
                 taskName
                 description
+                assignedTo{
+                  id
+                  name
+                }
             }
         }
         
@@ -105,7 +111,7 @@ export const CREATE_TASK = gql`
 
 
 export const UPDATE_TASK = gql`
-mutation UpdateTaskStatus($state: TaskState!, $comment: String!, $updateTaskStatusId: ID!, $dateOflastCompletion: Date, $completedBy: UserInput) {
+mutation UpdateTaskStatus($state: TaskState!, $comment: String!, $updateTaskStatusId: ID!, $dateOflastCompletion: Date, $completedBy: ID!) {
     updateTaskStatus(state: $state, comment: $comment, id: $updateTaskStatusId, dateOflastCompletion: $dateOflastCompletion, completedBy: $completedBy) {
       state
       comment

@@ -137,6 +137,7 @@ query Tasks {
       assigned
       assignedTo {
         id
+        name
       }
       repopulate
       repoulateValue

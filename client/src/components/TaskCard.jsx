@@ -77,7 +77,7 @@ const TaskCards = ({tasks}) => {
             <p className="m-0">Complete By : {formatDate(tasks.dueDate)}</p>
             )}
             {tasks.assigned && (
-            <p className="m-0">Assigned To : {tasks.assignedTo} </p>
+            <p className="m-0">Assigned To : {tasks.assignedTo?.name} </p>
             )}
             {tasks.description && (
           <Card.Text className="p-2 my-2 task-description">{tasks.description}</Card.Text>

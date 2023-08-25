@@ -23,7 +23,7 @@ const resolvers = {
             return await Group.findById(id);
         },
         tasks: async () => {
-            return await Task.find();
+            return await Task.find().populate("assignedTo").populate("completedBy");
         },
         task: async (parent, { id }) => {
             return await Task.findById(id);
@@ -62,13 +62,14 @@ const resolvers = {
       
             return { token, user };
           },
-        createGroup: async (parent, { name, owners, participants, tasks }) => {
-            const group = new Group({ name, owners, participants, tasks });
+        createGroup: async (parent, { name, owners, password }) => {
+            const group = new Group({ name, owners, password });
             await group.save();
             return group;
         },
-        addUserToGroup: async (parent, { userId, groupId }) => {
+        addUserToGroup: async (parent, { userId, groupId, password }) => {
             const group = await Group.findById(groupId);
+            // checkpassword
             if (group && !group.participants.includes(userId)) {
                 group.participants.push(userId);
                 await group.save();
@@ -84,10 +85,10 @@ const resolvers = {
             return group;
         },
         createTask: async (parent, { taskName, description, due, dueDate, assigned, assignedTo, repopulate, repopulateValue, dollarValue, dollarAmount, pointValue, pointAmount, state, comment }) => {
-            const assignedUser = User.findById(assignedTo.id)
-            const task = new Task({ taskName, description, due, dueDate, assigned, assignedUser, repopulate, repopulateValue, dollarValue, dollarAmount, pointValue, pointAmount, state, comment });
+            // const assignedUser = User.findById(assignedTo.id)
+            const task = new Task({ taskName, description, due, dueDate, assigned, assignedTo, repopulate, repopulateValue, dollarValue, dollarAmount, pointValue, pointAmount, state, comment });
             await task.save();
-            return task;
+            return await Task.findById(task.id).populate("assignedTo").populate("completedBy");
         },
         updateTaskStatus: async (parent, { id, state, comment }) => {
             const task = await Task.findById(id);
