@@ -17,15 +17,16 @@
   [Questions](#questions)
 
   ## Description
-  A todo list site where a user can log in and make a group with multiple other users. Tasks can be assigned to users of the group with due date, task name, money reward amount, and task description. The site will repopulate with the most recent tasks.
+  A todo list site where a user can log in and tasks can be made with due date, task name, money/point reward amount, and task description. The site will repopulate with tasks and completed tasks are listed with money or points tracked. 
 
   ## Installation 
   N/A
 
   ## Usage
-  Go to the Heroku link:
+  Go to the Heroku link: https://justtask-c9b4d9a95280.herokuapp.com
   Sign up for an account with a name, email, and password
-  Make a group by clicking the group tab at the top right of the site  
+  Make a task by clicking the task tab at the top right of the site
+  View tasks on the dashboard   
 
   ## Contributing
   Francis Jung, John Quaranta, Kyle McClendon, Abilgail Livick
@@ -62,6 +63,6 @@
   ## Questions
   For any questions related to the repository, reach me at the following email and/or Github
 
-  Email: kylem021199@gmail.com
+  Email: abilivick@gmail.com
 
   Github: lailiel
