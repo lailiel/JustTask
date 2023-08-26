@@ -17,10 +17,10 @@ const resolvers = {
             return await User.findById(id);
         },
         groups: async () => {
-            return await Group.find({});
+            return await Group.find().populate("owners").populate("participants");
         },
         group: async (parent, { id }) => {
-            return await Group.findById(id);
+            return await Group.findById(id).populate("owners").populate("participants");
         },
         tasks: async () => {
             return await Task.find().populate("assignedTo").populate("completedBy");
@@ -65,12 +65,12 @@ const resolvers = {
         createGroup: async (parent, { name, owners, password }) => {
             const group = new Group({ name, owners, password });
             await group.save();
-            return group;
+            return await Group.findById(group.id).populate("owners");
         },
-        addUserToGroup: async (parent, { userId, groupId, password }) => {
+        addUserToGroup: async (parent, { userId, groupId, groupPassword }) => {
             const group = await Group.findById(groupId);
             // checkpassword
-            if (group && !group.participants.includes(userId)) {
+            if (group && groupPassword === group.password && !group.participants.includes(userId)) {
                 group.participants.push(userId);
                 await group.save();
             }

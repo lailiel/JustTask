@@ -19,7 +19,10 @@ const userSchema = new Schema({
         required: true,
         minlength: 5,
     },
-    // groups: [{}],
+    groups: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Group',
+    }],
     assignedTasks: [{
         type: Schema.Types.ObjectId,
         ref: 'Task',
